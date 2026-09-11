@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, CalendarClock, CalendarDays, CalendarRange, CalendarSync, Check, Menu } from "lucide-react";
+import { ArrowLeft, ChartNoAxesColumnIncreasing, Check, Menu, RefreshCw, ScanLine, ShieldCheck, Sparkles } from "lucide-react";
 
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,7 @@ type ScalpCondition = "normal" | "oleoso" | "muito-oleoso" | "seco" | "sensivel"
 type PreviousTreatment = "nunca" | "shampoos-locoes" | "vitaminas-suplementos" | "indicado-profissional" | "varios" | "atualmente";
 type CareFrequency = "todos-dias" | "algumas-vezes-semana" | "raramente" | "praticamente-nunca" | "sem-rotina";
 type PerceivedPeriod = "dias" | "meses" | "um-ano" | "mais-de-um-ano";
+type MainGoal = "parar-queda" | "recuperar-densidade" | "fortalecer-fios" | "melhorar-entradas-coroa" | "rotina-completa";
 
 const validDurations: HairLossDuration[] = ["menos-6-meses", "6-meses-1-ano", "1-3-anos", "mais-3-anos", "incerto"];
 const validAreas: HairLossArea[] = ["entradas", "topo", "coroa", "entradas-topo", "varias-regioes"];
@@ -20,12 +21,14 @@ const validScalpConditions: ScalpCondition[] = ["normal", "oleoso", "muito-oleos
 const validTreatments: PreviousTreatment[] = ["nunca", "shampoos-locoes", "vitaminas-suplementos", "indicado-profissional", "varios", "atualmente"];
 const validFrequencies: CareFrequency[] = ["todos-dias", "algumas-vezes-semana", "raramente", "praticamente-nunca", "sem-rotina"];
 const validPeriods: PerceivedPeriod[] = ["dias", "meses", "um-ano", "mais-de-um-ano"];
+const validGoals: MainGoal[] = ["parar-queda", "recuperar-densidade", "fortalecer-fios", "melhorar-entradas-coroa", "rotina-completa"];
 
-const periodOptions = [
-  { value: "dias" as const, label: "Dias", icon: CalendarDays },
-  { value: "meses" as const, label: "Meses", icon: CalendarRange },
-  { value: "um-ano" as const, label: "1 ano", icon: CalendarClock },
-  { value: "mais-de-um-ano" as const, label: "Mais de 1 ano", icon: CalendarSync },
+const goalOptions = [
+  { value: "parar-queda" as const, label: "Parar a queda", icon: ShieldCheck },
+  { value: "recuperar-densidade" as const, label: "Recuperar densidade", icon: ChartNoAxesColumnIncreasing },
+  { value: "fortalecer-fios" as const, label: "Fortalecer os fios", icon: Sparkles },
+  { value: "melhorar-entradas-coroa" as const, label: "Melhorar entradas/coroa", icon: ScanLine },
+  { value: "rotina-completa" as const, label: "Ter uma rotina completa de cuidados", icon: RefreshCw },
 ];
 
 function parseDegree(value: unknown): BaldnessDegree {
@@ -37,13 +40,11 @@ function parseOption<T extends string>(value: unknown, options: T[], fallback: T
   return typeof value === "string" && options.includes(value as T) ? (value as T) : fallback;
 }
 
-function parsePeriod(value: unknown): PerceivedPeriod | undefined {
-  return typeof value === "string" && validPeriods.includes(value as PerceivedPeriod)
-    ? (value as PerceivedPeriod)
-    : undefined;
+function parseGoal(value: unknown): MainGoal | undefined {
+  return typeof value === "string" && validGoals.includes(value as MainGoal) ? (value as MainGoal) : undefined;
 }
 
-export const Route = createFileRoute("/periodo-afinamento")({
+export const Route = createFileRoute("/objetivo-principal")({
   validateSearch: (search: Record<string, unknown>) => ({
     nome: typeof search["nome"] === "string" ? search["nome"].slice(0, 80).trim() : "",
     grau: parseDegree(search["grau"]),
@@ -53,29 +54,30 @@ export const Route = createFileRoute("/periodo-afinamento")({
     couro: parseOption(search["couro"], validScalpConditions, "nao-sei"),
     tratamento: parseOption(search["tratamento"], validTreatments, "nunca"),
     frequencia: parseOption(search["frequencia"], validFrequencies, "sem-rotina"),
-    periodo: parsePeriod(search["periodo"]),
+    periodo: parseOption(search["periodo"], validPeriods, "meses"),
+    objetivo: parseGoal(search["objetivo"]),
   }),
   head: () => ({
     meta: [
-      { title: "Período do afinamento capilar | Stanley’s Care" },
-      { name: "description", content: "Informe se você percebe o afinamento ou a queda dos cabelos há dias, meses ou anos." },
-      { property: "og:title", content: "Período do afinamento capilar | Stanley’s Care" },
-      { property: "og:description", content: "Identifique há quanto tempo o afinamento ou a queda se tornou perceptível." },
+      { title: "Objetivo do cuidado capilar | Stanley’s Care" },
+      { name: "description", content: "Escolha o principal objetivo que você deseja alcançar com seus cuidados capilares." },
+      { property: "og:title", content: "Objetivo do cuidado capilar | Stanley’s Care" },
+      { property: "og:description", content: "Defina sua prioridade para personalizar sua avaliação capilar." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: PerceivedPeriodQuestion,
+  component: MainGoalQuestion,
 });
 
-function PerceivedPeriodQuestion() {
-  const { nome, grau, tempo, regiao, espessura, couro, tratamento, frequencia, periodo } = Route.useSearch();
-  const navigate = useNavigate({ from: "/periodo-afinamento" });
+function MainGoalQuestion() {
+  const { nome, grau, tempo, regiao, espessura, couro, tratamento, frequencia, periodo, objetivo } = Route.useSearch();
+  const navigate = useNavigate({ from: "/objetivo-principal" });
 
-  const selectPeriod = (value: PerceivedPeriod) => {
+  const selectGoal = (value: MainGoal) => {
     void navigate({
-      to: "/objetivo-principal",
-      search: { nome, grau, tempo, regiao, espessura, couro, tratamento, frequencia, periodo: value, objetivo: undefined },
+      search: { nome, grau, tempo, regiao, espessura, couro, tratamento, frequencia, periodo, objetivo: value },
+      replace: true,
     });
   };
 
@@ -85,9 +87,9 @@ function PerceivedPeriodQuestion() {
         <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-5 sm:px-8 lg:px-12">
           <Button asChild variant="ghost" size="icon" className="size-10 rounded-full text-muted-foreground hover:bg-secondary hover:text-foreground">
             <Link
-              to="/frequencia-cuidados"
-              search={{ nome, grau, tempo, regiao, espessura, couro, tratamento, frequencia }}
-              aria-label="Voltar para a pergunta sobre frequência de cuidados"
+              to="/periodo-afinamento"
+              search={{ nome, grau, tempo, regiao, espessura, couro, tratamento, frequencia, periodo }}
+              aria-label="Voltar para a pergunta sobre o período do afinamento"
             >
               <ArrowLeft className="size-5" />
             </Link>
@@ -99,23 +101,23 @@ function PerceivedPeriodQuestion() {
             <Menu className="size-5" />
           </Button>
         </div>
-        <div className="absolute inset-x-0 -bottom-px h-1" aria-label="Etapa 11 do questionário">
+        <div className="absolute inset-x-0 -bottom-px h-1" aria-label="Etapa 12 do questionário">
           <div className="h-full w-full bg-primary" />
         </div>
       </header>
 
-      <main className="flex flex-1 items-start justify-center px-5 py-12 sm:px-8 sm:py-16 lg:items-center lg:py-10">
-        <section className="w-full max-w-[720px]" aria-labelledby="period-question">
+      <main className="flex flex-1 items-start justify-center px-5 py-9 sm:px-8 sm:py-12 lg:items-center lg:py-9">
+        <section className="w-full max-w-[720px]" aria-labelledby="goal-question">
           <div className="text-center">
-            <p className="text-xs font-semibold uppercase text-primary sm:text-sm">Tempo percebido</p>
-            <h1 id="period-question" className="mx-auto mt-4 max-w-[680px] font-display text-[28px] font-normal leading-[1.2] sm:text-[34px]">
-              Há quanto tempo você percebe o afinamento/queda?
+            <p className="text-xs font-semibold uppercase text-primary sm:text-sm">Seu objetivo</p>
+            <h1 id="goal-question" className="mx-auto mt-4 max-w-[680px] font-display text-[28px] font-normal leading-[1.2] sm:text-[34px]">
+              Qual é o seu principal objetivo hoje?
             </h1>
           </div>
 
-          <div className="mx-auto mt-8 grid max-w-[620px] gap-3 sm:mt-10 sm:grid-cols-2 sm:gap-4">
-            {periodOptions.map((option) => {
-              const isSelected = periodo === option.value;
+          <div className="mt-8 grid gap-3 sm:mt-10">
+            {goalOptions.map((option) => {
+              const isSelected = objetivo === option.value;
               const Icon = option.icon;
               return (
                 <Button
@@ -123,13 +125,13 @@ function PerceivedPeriodQuestion() {
                   type="button"
                   variant="outline"
                   aria-pressed={isSelected}
-                  onClick={() => selectPeriod(option.value)}
-                  className="group grid h-auto min-h-[88px] w-full grid-cols-[44px_minmax(0,1fr)_auto] items-center gap-4 rounded-lg border-border bg-card px-5 py-4 text-left text-card-foreground shadow-none transition duration-200 hover:border-primary/70 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-secondary sm:min-h-[104px]"
+                  onClick={() => selectGoal(option.value)}
+                  className="group grid h-auto min-h-[68px] w-full grid-cols-[40px_minmax(0,1fr)_auto] items-center gap-3 rounded-lg border-border bg-card px-4 py-3 text-left text-card-foreground shadow-none transition duration-200 hover:border-primary/70 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-secondary sm:min-h-[74px] sm:grid-cols-[44px_minmax(0,1fr)_auto] sm:gap-4 sm:px-5"
                 >
-                  <span className="grid size-10 place-items-center rounded-md bg-muted text-primary" aria-hidden="true">
+                  <span className="grid size-9 place-items-center rounded-md bg-muted text-primary" aria-hidden="true">
                     <Icon className="size-5" />
                   </span>
-                  <span className="min-w-0 whitespace-normal text-base font-semibold leading-5 sm:text-lg">{option.label}</span>
+                  <span className="min-w-0 whitespace-normal text-sm font-semibold leading-5 sm:text-base">{option.label}</span>
                   <span className="grid size-7 shrink-0 place-items-center rounded-full border border-muted-foreground/60 text-transparent transition group-aria-pressed:border-primary group-aria-pressed:bg-primary group-aria-pressed:text-primary-foreground sm:size-8">
                     <Check className="size-4" aria-hidden="true" />
                   </span>
