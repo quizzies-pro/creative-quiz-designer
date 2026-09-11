@@ -50,7 +50,7 @@ function VideoOpening() {
               id="opening-title"
               className="font-display text-[28px] font-normal leading-tight sm:text-[34px]"
             >
-              Antes do seu diagnóstico, veja o que seu cabelo pode estar tentando dizer
+              O produto certo com um diagnóstico personalizado, veja o que seu cabelo pode estar tentando dizer
             </h1>
             <p className="mx-auto mt-3 max-w-[460px] text-sm leading-relaxed text-muted-foreground sm:text-base">
               Assista ao vídeo e descubra por que entender os sinais da queda é o primeiro passo para cuidar melhor dos seus fios.
