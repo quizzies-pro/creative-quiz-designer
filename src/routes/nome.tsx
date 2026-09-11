@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, CircleHelp, Menu } from "lucide-react";
 import { useState } from "react";
 
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
+import { QuizProgress } from "@/components/quiz/quiz-progress";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -56,9 +57,7 @@ function NameQuestion() {
             <Menu className="size-5" />
           </Button>
         </div>
-        <div className="absolute inset-x-0 -bottom-px h-1" aria-label="Etapa 2 do questionário">
-          <div className="h-full w-1/4 bg-primary" />
-        </div>
+        <QuizProgress currentStep={2} />
       </header>
 
       <main className="relative flex flex-1 items-start justify-center px-5 pb-12 pt-16 sm:items-center sm:px-8 sm:pb-28 sm:pt-8">

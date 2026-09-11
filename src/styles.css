@@ -191,3 +191,32 @@
     transition: none;
   }
 }
+
+@layer components {
+  .quiz-progress {
+    appearance: none;
+    border: 0;
+    background: transparent;
+  }
+
+  .quiz-progress::-webkit-progress-bar {
+    background: transparent;
+  }
+
+  .quiz-progress::-webkit-progress-value {
+    background: var(--primary);
+    transition: width 240ms ease-out;
+  }
+
+  .quiz-progress::-moz-progress-bar {
+    background: var(--primary);
+    transition: width 240ms ease-out;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quiz-progress::-webkit-progress-value,
+  .quiz-progress::-moz-progress-bar {
+    transition: none;
+  }
+}

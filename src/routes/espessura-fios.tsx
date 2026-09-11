@@ -2,6 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, Check, Menu } from "lucide-react";
 
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
+import { QuizProgress } from "@/components/quiz/quiz-progress";
 import { Button } from "@/components/ui/button";
 
 type BaldnessDegree = 1 | 2 | 3 | 4;
@@ -111,9 +112,7 @@ function HairThicknessQuestion() {
             <Menu className="size-5" />
           </Button>
         </div>
-        <div className="absolute inset-x-0 -bottom-px h-1" aria-label="Etapa 7 do questionário">
-          <div className="h-full w-[96%] bg-primary" />
-        </div>
+        <QuizProgress currentStep={8} />
       </header>
 
       <main className="flex flex-1 items-start justify-center px-5 py-10 sm:px-8 sm:py-14 lg:items-center lg:py-10">

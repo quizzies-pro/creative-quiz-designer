@@ -7,6 +7,7 @@ import degree2Asset from "@/assets/baldness-degree-2.jpg.asset.json";
 import degree3Asset from "@/assets/baldness-degree-3.jpg.asset.json";
 import degree4Asset from "@/assets/baldness-degree-4.jpg.asset.json";
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
+import { QuizProgress } from "@/components/quiz/quiz-progress";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/calvicie")({
@@ -67,9 +68,7 @@ function BaldnessQuestion() {
             <Menu className="size-5" />
           </Button>
         </div>
-        <div className="absolute inset-x-0 -bottom-px h-1" aria-label="Etapa 3 do questionário">
-          <div className="h-full w-2/5 bg-primary" />
-        </div>
+        <QuizProgress currentStep={3} />
       </header>
 
       <main className="relative flex flex-1 items-start justify-center px-4 pb-10 pt-10 sm:px-8 sm:pb-24 sm:pt-12">
