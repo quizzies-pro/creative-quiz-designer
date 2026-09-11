@@ -14,6 +14,7 @@ import { Route as CalvicieRouteImport } from './routes/calvicie'
 import { Route as DiagnosticoCapilarRouteImport } from './routes/diagnostico-capilar'
 import { Route as MotivacionalRouteImport } from './routes/motivacional'
 import { Route as NomeRouteImport } from './routes/nome'
+import { Route as RegiaoQuedaRouteImport } from './routes/regiao-queda'
 import { Route as TempoQuedaRouteImport } from './routes/tempo-queda'
 
 const IndexRoute = IndexRouteImport.update({
@@ -41,6 +42,11 @@ const NomeRoute = NomeRouteImport.update({
   path: '/nome',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RegiaoQuedaRoute = RegiaoQuedaRouteImport.update({
+  id: '/regiao-queda',
+  path: '/regiao-queda',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TempoQuedaRoute = TempoQuedaRouteImport.update({
   id: '/tempo-queda',
   path: '/tempo-queda',
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/diagnostico-capilar': typeof DiagnosticoCapilarRoute
   '/motivacional': typeof MotivacionalRoute
   '/nome': typeof NomeRoute
+  '/regiao-queda': typeof RegiaoQuedaRoute
   '/tempo-queda': typeof TempoQuedaRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/diagnostico-capilar': typeof DiagnosticoCapilarRoute
   '/motivacional': typeof MotivacionalRoute
   '/nome': typeof NomeRoute
+  '/regiao-queda': typeof RegiaoQuedaRoute
   '/tempo-queda': typeof TempoQuedaRoute
 }
 export interface FileRoutesById {
@@ -70,6 +78,7 @@ export interface FileRoutesById {
   '/diagnostico-capilar': typeof DiagnosticoCapilarRoute
   '/motivacional': typeof MotivacionalRoute
   '/nome': typeof NomeRoute
+  '/regiao-queda': typeof RegiaoQuedaRoute
   '/tempo-queda': typeof TempoQuedaRoute
 }
 export interface FileRouteTypes {
@@ -80,6 +89,7 @@ export interface FileRouteTypes {
     | '/diagnostico-capilar'
     | '/motivacional'
     | '/nome'
+    | '/regiao-queda'
     | '/tempo-queda'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -88,6 +98,7 @@ export interface FileRouteTypes {
     | '/diagnostico-capilar'
     | '/motivacional'
     | '/nome'
+    | '/regiao-queda'
     | '/tempo-queda'
   id:
     | '__root__'
@@ -96,6 +107,7 @@ export interface FileRouteTypes {
     | '/diagnostico-capilar'
     | '/motivacional'
     | '/nome'
+    | '/regiao-queda'
     | '/tempo-queda'
   fileRoutesById: FileRoutesById
 }
@@ -105,6 +117,7 @@ export interface RootRouteChildren {
   DiagnosticoCapilarRoute: typeof DiagnosticoCapilarRoute
   MotivacionalRoute: typeof MotivacionalRoute
   NomeRoute: typeof NomeRoute
+  RegiaoQuedaRoute: typeof RegiaoQuedaRoute
   TempoQuedaRoute: typeof TempoQuedaRoute
 }
 
@@ -145,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NomeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/regiao-queda': {
+      id: '/regiao-queda'
+      path: '/regiao-queda'
+      fullPath: '/regiao-queda'
+      preLoaderRoute: typeof RegiaoQuedaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tempo-queda': {
       id: '/tempo-queda'
       path: '/tempo-queda'
@@ -161,6 +181,7 @@ const rootRouteChildren: RootRouteChildren = {
   DiagnosticoCapilarRoute: DiagnosticoCapilarRoute,
   MotivacionalRoute: MotivacionalRoute,
   NomeRoute: NomeRoute,
+  RegiaoQuedaRoute: RegiaoQuedaRoute,
   TempoQuedaRoute: TempoQuedaRoute,
 }
 export const routeTree = rootRouteImport

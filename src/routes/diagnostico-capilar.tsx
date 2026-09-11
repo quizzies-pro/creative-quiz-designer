@@ -1,5 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, Check, Menu, ScanSearch, ShieldCheck } from "lucide-react";
+import { useEffect } from "react";
 
 import newsHistoryAsset from "@/assets/noticia-historico-capilar.png.asset.json";
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
@@ -53,7 +54,20 @@ export const Route = createFileRoute("/diagnostico-capilar")({
 });
 
 function HairDiagnosisTransition() {
-  const { nome, grau } = Route.useSearch();
+  const { nome, grau, tempo } = Route.useSearch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const transitionTimer = window.setTimeout(() => {
+      void navigate({
+        to: "/regiao-queda",
+        search: { nome, grau, tempo },
+        replace: true,
+      });
+    }, 4000);
+
+    return () => window.clearTimeout(transitionTimer);
+  }, [grau, navigate, nome, tempo]);
 
   return (
     <div className="quiz-page-background flex min-h-screen flex-col bg-background text-foreground">
