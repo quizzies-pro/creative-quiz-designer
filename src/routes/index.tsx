@@ -32,7 +32,7 @@ function Index() {
 
   return (
     <div className="quiz-page-background relative flex min-h-screen flex-col overflow-hidden bg-background text-foreground">
-      <header>
+      <header className="border-b border-border/70">
         <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[minmax(0,1fr)_auto] items-center px-5 sm:px-8 lg:px-12">
           <a href="/" className="min-w-0" aria-label="Stanley’s Care — início">
             <img src={logoAsset.url} alt="Stanley’s Care" className="h-auto w-[190px] max-w-[58vw]" />
