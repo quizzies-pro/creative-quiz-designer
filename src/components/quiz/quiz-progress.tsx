@@ -2,7 +2,7 @@ type QuizProgressProps = {
   currentStep: number;
 };
 
-const TOTAL_QUIZ_STEPS = 13;
+const TOTAL_QUIZ_STEPS = 14;
 
 export function QuizProgress({ currentStep }: QuizProgressProps) {
   const safeStep = Math.min(Math.max(currentStep, 1), TOTAL_QUIZ_STEPS);
