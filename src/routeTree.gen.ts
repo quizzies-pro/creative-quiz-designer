@@ -18,6 +18,7 @@ import { Route as MotivacionalRouteImport } from './routes/motivacional'
 import { Route as NomeRouteImport } from './routes/nome'
 import { Route as RegiaoQuedaRouteImport } from './routes/regiao-queda'
 import { Route as TempoQuedaRouteImport } from './routes/tempo-queda'
+import { Route as TratamentoAnteriorRouteImport } from './routes/tratamento-anterior'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -64,6 +65,11 @@ const TempoQuedaRoute = TempoQuedaRouteImport.update({
   path: '/tempo-queda',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TratamentoAnteriorRoute = TratamentoAnteriorRouteImport.update({
+  id: '/tratamento-anterior',
+  path: '/tratamento-anterior',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/nome': typeof NomeRoute
   '/regiao-queda': typeof RegiaoQuedaRoute
   '/tempo-queda': typeof TempoQuedaRoute
+  '/tratamento-anterior': typeof TratamentoAnteriorRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByTo {
   '/nome': typeof NomeRoute
   '/regiao-queda': typeof RegiaoQuedaRoute
   '/tempo-queda': typeof TempoQuedaRoute
+  '/tratamento-anterior': typeof TratamentoAnteriorRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/nome': typeof NomeRoute
   '/regiao-queda': typeof RegiaoQuedaRoute
   '/tempo-queda': typeof TempoQuedaRoute
+  '/tratamento-anterior': typeof TratamentoAnteriorRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/nome'
     | '/regiao-queda'
     | '/tempo-queda'
+    | '/tratamento-anterior'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/nome'
     | '/regiao-queda'
     | '/tempo-queda'
+    | '/tratamento-anterior'
   id:
     | '__root__'
     | '/'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/nome'
     | '/regiao-queda'
     | '/tempo-queda'
+    | '/tratamento-anterior'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -145,6 +157,7 @@ export interface RootRouteChildren {
   NomeRoute: typeof NomeRoute
   RegiaoQuedaRoute: typeof RegiaoQuedaRoute
   TempoQuedaRoute: typeof TempoQuedaRoute
+  TratamentoAnteriorRoute: typeof TratamentoAnteriorRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -212,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TempoQuedaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tratamento-anterior': {
+      id: '/tratamento-anterior'
+      path: '/tratamento-anterior'
+      fullPath: '/tratamento-anterior'
+      preLoaderRoute: typeof TratamentoAnteriorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -225,6 +245,7 @@ const rootRouteChildren: RootRouteChildren = {
   NomeRoute: NomeRoute,
   RegiaoQuedaRoute: RegiaoQuedaRoute,
   TempoQuedaRoute: TempoQuedaRoute,
+  TratamentoAnteriorRoute: TratamentoAnteriorRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
