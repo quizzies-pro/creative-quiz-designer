@@ -70,7 +70,7 @@ function AgeQuestion() {
               Cada fase da vida pede um cuidado diferente. Vamos encontrar o ideal para você.
             </h1>
             <p className="mt-5 text-base font-semibold uppercase text-muted-foreground sm:text-lg">
-              Escolha a sua idade
+              QUAL É A SUA IDADE?
             </p>
           </div>
 
