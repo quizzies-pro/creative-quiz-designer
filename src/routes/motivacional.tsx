@@ -130,9 +130,11 @@ function MotivationalPage() {
 
       <footer className="border-t border-border/70 px-5 py-4 sm:px-8">
         <div className="mx-auto flex max-w-[980px] justify-center">
-          <Button type="button" className="h-12 w-full max-w-[360px] rounded-full text-sm font-bold uppercase">
-            Continuar
-            <ArrowRight className="size-4" />
+          <Button asChild className="h-12 w-full max-w-[360px] rounded-full text-sm font-bold uppercase">
+            <Link to="/tempo-queda" search={{ nome, grau }}>
+              Continuar
+              <ArrowRight className="size-4" />
+            </Link>
           </Button>
         </div>
       </footer>
