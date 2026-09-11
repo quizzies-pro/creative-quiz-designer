@@ -47,7 +47,7 @@ function Index() {
         </div>
       </header>
 
-      <main className="relative flex flex-1 items-start justify-center px-4 pb-28 pt-12 sm:px-8 sm:pt-16 lg:pt-14">
+      <main className="relative flex flex-1 items-start justify-center px-4 pb-10 pt-10 sm:px-8 sm:pb-28 sm:pt-16 lg:pt-14">
         <div className="pointer-events-none absolute left-1/2 top-0 h-80 w-[70%] -translate-x-1/2 bg-[radial-gradient(circle,var(--primary-glow),transparent_68%)] opacity-20" />
 
         <section className="relative w-full max-w-[930px]" aria-labelledby="page-title">
@@ -61,7 +61,7 @@ function Index() {
             </p>
           </div>
 
-          <div className="mt-8 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
+          <div className="mt-7 grid grid-cols-2 gap-3 sm:mt-8 sm:gap-5 lg:grid-cols-4">
             {ageRanges.map((age) => {
               const isSelected = selectedAge === age;
               return (
@@ -73,7 +73,7 @@ function Index() {
                   onClick={() => setSelectedAge(age)}
                   className="group h-auto min-w-0 flex-col gap-0 overflow-hidden rounded-xl border-border bg-card p-0 text-left text-card-foreground shadow-none transition duration-300 hover:-translate-y-1 hover:border-primary/70 hover:bg-card focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-card"
                 >
-                  <span className="relative flex aspect-[.94] w-full items-center justify-center overflow-hidden bg-secondary">
+                  <span className="relative flex aspect-[1.2] w-full items-center justify-center overflow-hidden bg-secondary sm:aspect-[.94]">
                     <span className="absolute inset-0 bg-[radial-gradient(circle_at_50%_65%,var(--primary-glow),transparent_56%)] opacity-25 transition-opacity group-hover:opacity-40" />
                     <UserRound aria-hidden="true" className="size-20 text-muted-foreground/45 sm:size-24" strokeWidth={1} />
                     <span className="absolute bottom-3 text-[10px] font-medium uppercase text-muted-foreground">Foto em breve</span>
@@ -102,7 +102,7 @@ function Index() {
 
       <Button
         variant="secondary"
-        className="fixed bottom-4 right-4 h-10 rounded-full border border-border px-4 shadow-lg sm:bottom-5 sm:right-6"
+        className="fixed bottom-5 right-6 hidden h-10 rounded-full border border-border px-4 shadow-lg sm:inline-flex"
         aria-label="Abrir ajuda"
       >
         <CircleHelp className="size-4" />
