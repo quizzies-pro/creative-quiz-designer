@@ -60,7 +60,7 @@ function HairDiagnosisTransition() {
 
   useEffect(() => {
     const startedAt = Date.now();
-    const progressDuration = 2800;
+    const progressDuration = 2600;
 
     const progressTimer = window.setInterval(() => {
       const elapsed = Date.now() - startedAt;
@@ -74,7 +74,7 @@ function HairDiagnosisTransition() {
         search: { nome, grau, tempo, regiao: undefined },
         replace: true,
       });
-    }, 3000);
+    }, 2800);
 
     return () => {
       window.clearInterval(progressTimer);
