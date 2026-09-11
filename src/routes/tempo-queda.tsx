@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, Check, HelpCircle, Menu } from "lucide-react";
+import { ArrowLeft, Check, HelpCircle, Menu } from "lucide-react";
 import { useState } from "react";
 
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
@@ -112,15 +112,6 @@ function HairLossDurationQuestion() {
           </div>
         </section>
       </main>
-
-      <footer className="border-t border-border/70 px-5 py-4 sm:px-8">
-        <div className="mx-auto flex max-w-[680px] justify-center">
-          <Button type="button" disabled={!selectedDuration} className="h-12 w-full max-w-[360px] rounded-full text-sm font-bold uppercase">
-            Continuar
-            <ArrowRight className="size-4" />
-          </Button>
-        </div>
-      </footer>
 
       <Button
         variant="secondary"
