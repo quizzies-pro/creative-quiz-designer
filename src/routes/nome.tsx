@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 
 export const Route = createFileRoute("/nome")({
   validateSearch: (search: Record<string, unknown>) => ({
-    nome: typeof search.nome === "string" ? search.nome.slice(0, 80) : "",
+    nome: typeof search["nome"] === "string" ? search["nome"].slice(0, 80) : "",
   }),
   head: () => ({
     meta: [

@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/calvicie")({
   validateSearch: (search: Record<string, unknown>) => ({
-    nome: typeof search.nome === "string" ? search.nome.slice(0, 80).trim() : "",
+    nome: typeof search["nome"] === "string" ? search["nome"].slice(0, 80).trim() : "",
   }),
   head: () => ({
     meta: [
