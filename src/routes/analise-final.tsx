@@ -76,12 +76,13 @@ function FinalAnalysis() {
 
   useEffect(() => {
     const startedAt = Date.now();
-    const duration = 4200;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const duration = reduceMotion ? 180 : 2400;
     const timer = window.setInterval(() => {
       const nextProgress = Math.min(100, Math.round(((Date.now() - startedAt) / duration) * 100));
       setProgress(nextProgress);
       if (nextProgress === 100) window.clearInterval(timer);
-    }, 40);
+    }, 80);
     return () => window.clearInterval(timer);
   }, []);
 
@@ -94,13 +95,13 @@ function FinalAnalysis() {
         search,
         replace: true,
       });
-    }, 350);
+    }, 200);
 
     return () => window.clearTimeout(transitionTimer);
   }, [navigate, progress, search]);
 
   return (
-    <div className="quiz-page-background flex min-h-screen flex-col bg-background text-foreground">
+    <div className="quiz-page-background flex min-h-dvh flex-col bg-background text-foreground">
       <header className="relative border-b border-border/70">
         <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-5 sm:px-8 lg:px-12">
           <Button asChild variant="ghost" size="icon" className="size-10 rounded-full text-muted-foreground hover:bg-secondary hover:text-foreground">
