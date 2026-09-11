@@ -81,8 +81,8 @@ function HairThicknessQuestion() {
 
   const selectThickness = (value: HairThickness) => {
     void navigate({
-      search: { nome, grau, tempo, regiao, espessura: value },
-      replace: true,
+      to: "/couro-cabeludo",
+      search: { nome, grau, tempo, regiao, espessura: value, couro: undefined },
     });
   };
 
