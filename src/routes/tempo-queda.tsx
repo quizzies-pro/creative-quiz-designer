@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, Check, HelpCircle, Menu } from "lucide-react";
 import { useState } from "react";
 
@@ -52,7 +52,16 @@ export const Route = createFileRoute("/tempo-queda")({
 
 function HairLossDurationQuestion() {
   const { nome, grau } = Route.useSearch();
+  const navigate = useNavigate();
   const [selectedDuration, setSelectedDuration] = useState<HairLossDuration | null>(null);
+
+  const selectDuration = (duration: HairLossDuration) => {
+    setSelectedDuration(duration);
+    void navigate({
+      to: "/diagnostico-capilar",
+      search: { nome, grau, tempo: duration },
+    });
+  };
 
   return (
     <div className="quiz-page-background flex min-h-screen flex-col bg-background text-foreground">
@@ -98,7 +107,7 @@ function HairLossDurationQuestion() {
                   type="button"
                   variant="outline"
                   aria-pressed={isSelected}
-                  onClick={() => setSelectedDuration(option.value)}
+                  onClick={() => selectDuration(option.value)}
                   className="group grid min-h-[66px] w-full grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 rounded-lg border-border bg-card px-5 py-3 text-left text-card-foreground shadow-none transition duration-200 hover:border-primary/70 hover:bg-secondary aria-pressed:border-primary aria-pressed:bg-secondary sm:min-h-[72px] sm:px-6"
                 >
                   <span className="text-xl" aria-hidden="true">{option.emoji}</span>
