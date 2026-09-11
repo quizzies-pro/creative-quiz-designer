@@ -81,19 +81,19 @@ function Index() {
                   variant="outline"
                   aria-pressed={isSelected}
                   onClick={() => setSelectedAge(label)}
-                  className="group h-auto min-w-0 flex-col gap-0 overflow-hidden rounded-xl border-border bg-card p-0 text-left text-card-foreground shadow-none transition duration-300 hover:-translate-y-1 hover:border-primary/70 hover:bg-card focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-card"
+                  className="group relative aspect-[0.88] h-auto min-w-0 overflow-hidden rounded-2xl border-border bg-card p-0 text-left text-card-foreground shadow-none transition duration-300 hover:-translate-y-1 hover:border-primary/70 hover:bg-card focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-card"
                 >
-                  <span className="relative flex aspect-[1.2] w-full items-center justify-center overflow-hidden bg-secondary sm:aspect-[.94]">
+                  <span className="absolute inset-0 overflow-hidden bg-secondary">
                     <img
                       src={image}
                       alt={`Homem representando a faixa etária de ${label} anos`}
                       className="size-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.025]"
                     />
                   </span>
-                  <span className="m-1.5 grid w-[calc(100%-0.75rem)] grid-cols-[minmax(0,1fr)_auto] items-center gap-2 rounded-lg bg-foreground px-3 py-2.5 text-background sm:m-2 sm:w-[calc(100%-1rem)] sm:px-4">
+                  <span className="absolute inset-x-1.5 bottom-1.5 grid min-h-12 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 rounded-xl bg-foreground px-3 py-2 text-background sm:inset-x-2 sm:bottom-2 sm:min-h-14 sm:px-4">
                     <span className="min-w-0 truncate text-sm font-bold sm:text-base">Idade: {label}</span>
-                    <span className="grid size-7 shrink-0 place-items-center rounded-full bg-background text-foreground transition-transform group-hover:translate-x-0.5">
-                      <ArrowRight className="size-4" />
+                    <span className="grid size-8 shrink-0 place-items-center rounded-full bg-background text-foreground transition-transform group-hover:translate-x-0.5 sm:size-9">
+                      <ArrowRight className="size-4 sm:size-5" />
                     </span>
                   </span>
                 </Button>
