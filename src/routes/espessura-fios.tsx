@@ -16,12 +16,12 @@ const validThicknesses: HairThickness[] = ["grossos", "alguns-finos", "maioria-f
 const thicknessOptions: Array<{
   value: HairThickness;
   label: string;
-  strands: number[];
+  strands: Array<"thick" | "medium" | "thin">;
 }> = [
-  { value: "grossos", label: "Meus fios ainda são grossos", strands: [4, 4, 4] },
-  { value: "alguns-finos", label: "Alguns fios estão mais finos", strands: [4, 2, 4] },
-  { value: "maioria-fina", label: "A maioria está mais fina", strands: [2, 2, 4] },
-  { value: "muito-finos", label: "Meus fios estão muito finos e frágeis", strands: [1, 1, 1] },
+  { value: "grossos", label: "Meus fios ainda são grossos", strands: ["thick", "thick", "thick"] },
+  { value: "alguns-finos", label: "Alguns fios estão mais finos", strands: ["thick", "medium", "thick"] },
+  { value: "maioria-fina", label: "A maioria está mais fina", strands: ["medium", "medium", "thick"] },
+  { value: "muito-finos", label: "Meus fios estão muito finos e frágeis", strands: ["thin", "thin", "thin"] },
   { value: "nao-percebo", label: "Não consigo perceber", strands: [] },
 ];
 
@@ -142,11 +142,10 @@ function HairThicknessQuestion() {
                   className="group grid h-auto min-h-[68px] w-full grid-cols-[48px_minmax(0,1fr)_auto] items-center gap-4 rounded-lg border-border bg-card px-4 py-3 text-left text-card-foreground shadow-none transition duration-200 hover:border-primary/70 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-secondary sm:min-h-[76px] sm:grid-cols-[56px_minmax(0,1fr)_auto] sm:px-5"
                 >
                   <span className="flex h-10 items-center justify-center gap-1 rounded-md bg-muted" aria-hidden="true">
-                    {option.strands.length > 0 ? option.strands.map((width, index) => (
+                    {option.strands.length > 0 ? option.strands.map((strand, index) => (
                       <span
                         key={`${option.value}-${index}`}
-                        className="h-6 rounded-full bg-primary"
-                        style={{ width: `${width}px` }}
+                        className={`h-6 rounded-full bg-primary ${strand === "thick" ? "w-1" : strand === "medium" ? "w-0.5" : "w-px"}`}
                       />
                     )) : <span className="font-display text-lg font-normal text-muted-foreground">?</span>}
                   </span>
