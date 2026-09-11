@@ -2,11 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, Check, Menu } from "lucide-react";
 import { useState } from "react";
 
-import crownAsset from "@/assets/regiao-coroa.jpg.asset.json";
-import hairlineAsset from "@/assets/regiao-entradas.jpg.asset.json";
-import hairlineTopAsset from "@/assets/regiao-entradas-topo.jpg.asset.json";
-import topAsset from "@/assets/regiao-topo-da-cabeca.jpg.asset.json";
-import multipleAreasAsset from "@/assets/regiao-varias-regioes.jpg.asset.json";
+import crownAsset from "@/assets/regiao-coroa.webp.asset.json";
+import hairlineAsset from "@/assets/regiao-entradas.webp.asset.json";
+import hairlineTopAsset from "@/assets/regiao-entradas-topo.webp.asset.json";
+import topAsset from "@/assets/regiao-topo-da-cabeca.webp.asset.json";
+import multipleAreasAsset from "@/assets/regiao-varias-regioes.webp.asset.json";
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
 import { Button } from "@/components/ui/button";
 
@@ -26,7 +26,6 @@ const areaOptions: Array<{
   value: HairLossArea;
   label: string;
   image: string;
-  imagePosition?: string;
 }> = [
   { value: "entradas", label: "Entradas", image: hairlineAsset.url },
   { value: "topo", label: "Topo da cabeça", image: topAsset.url },
@@ -134,8 +133,8 @@ function HairLossAreaQuestion() {
                     <img
                       src={option.image}
                       alt={`Exemplo visual: ${option.label}`}
-                      width={1792}
-                      height={2400}
+                      width={480}
+                      height={480}
                       className="size-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.035]"
                     />
                   </span>
