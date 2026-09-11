@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, CircleHelp, Menu } from "lucide-react";
 import { useState } from "react";
 
@@ -29,6 +29,7 @@ export const Route = createFileRoute("/nome")({
 function NameQuestion() {
   const [name, setName] = useState("");
   const canContinue = name.trim().length > 0;
+  const navigate = useNavigate();
 
   return (
     <div className="quiz-page-background relative flex min-h-screen flex-col overflow-hidden bg-background text-foreground">
@@ -66,7 +67,13 @@ function NameQuestion() {
             Assim, podemos personalizar melhor a sua experiência.
           </p>
 
-          <form className="mx-auto mt-9 max-w-[520px]" onSubmit={(event) => event.preventDefault()}>
+          <form
+            className="mx-auto mt-9 max-w-[520px]"
+            onSubmit={(event) => {
+              event.preventDefault();
+              if (canContinue) void navigate({ to: "/calvicie" });
+            }}
+          >
             <label htmlFor="name" className="sr-only">Seu nome</label>
             <Input
               id="name"
