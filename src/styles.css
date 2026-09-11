@@ -159,27 +159,35 @@
     background-repeat: no-repeat;
   }
 
-  .diagnosis-loading-bar {
-    animation: diagnosis-loading 2.2s ease-in-out infinite;
-    box-shadow: 0 0 14px color-mix(in oklch, var(--primary) 45%, transparent);
+  .diagnosis-progress {
+    appearance: none;
+    border: 0;
+    background: var(--secondary);
   }
-}
 
-@keyframes diagnosis-loading {
-  0% {
-    transform: translateX(-105%);
+  .diagnosis-progress::-webkit-progress-bar {
+    border-radius: 999px;
+    background: var(--secondary);
   }
-  50% {
-    transform: translateX(105%);
+
+  .diagnosis-progress::-webkit-progress-value {
+    border-radius: 999px;
+    background: var(--primary);
+    box-shadow: 0 0 14px color-mix(in oklch, var(--primary) 45%, transparent);
+    transition: width 80ms linear;
   }
-  100% {
-    transform: translateX(-105%);
+
+  .diagnosis-progress::-moz-progress-bar {
+    border-radius: 999px;
+    background: var(--primary);
+    box-shadow: 0 0 14px color-mix(in oklch, var(--primary) 45%, transparent);
+    transition: width 80ms linear;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .diagnosis-loading-bar {
-    animation: none;
-    transform: translateX(50%);
+  .diagnosis-progress::-webkit-progress-value,
+  .diagnosis-progress::-moz-progress-bar {
+    transition: none;
   }
 }

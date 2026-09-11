@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, Check, Menu, ScanSearch, ShieldCheck } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import newsHistoryAsset from "@/assets/noticia-historico-capilar.png.asset.json";
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
@@ -56,17 +56,30 @@ export const Route = createFileRoute("/diagnostico-capilar")({
 function HairDiagnosisTransition() {
   const { nome, grau, tempo } = Route.useSearch();
   const navigate = useNavigate();
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    const startedAt = Date.now();
+    const progressDuration = 2600;
+
+    const progressTimer = window.setInterval(() => {
+      const elapsed = Date.now() - startedAt;
+      setProgress(Math.min(100, Math.round((elapsed / progressDuration) * 100)));
+    }, 30);
+
     const transitionTimer = window.setTimeout(() => {
+      setProgress(100);
       void navigate({
         to: "/regiao-queda",
         search: { nome, grau, tempo, regiao: undefined },
         replace: true,
       });
-    }, 4000);
+    }, 2800);
 
-    return () => window.clearTimeout(transitionTimer);
+    return () => {
+      window.clearInterval(progressTimer);
+      window.clearTimeout(transitionTimer);
+    };
   }, [grau, navigate, nome, tempo]);
 
   return (
@@ -147,17 +160,16 @@ function HairDiagnosisTransition() {
               </div>
 
               <div className="mt-7 w-full" role="status" aria-live="polite">
-                <div className="relative h-2 w-full overflow-hidden rounded-full bg-secondary">
-                  <div className="diagnosis-loading-bar absolute inset-y-0 left-0 w-1/2 rounded-full bg-primary" />
-                </div>
-                <div className="mt-4 flex items-center justify-center gap-3 text-primary">
-                  <span className="flex gap-1" aria-hidden="true">
-                    <span className="size-1.5 animate-bounce rounded-full bg-primary [animation-delay:-300ms] motion-reduce:animate-none" />
-                    <span className="size-1.5 animate-bounce rounded-full bg-primary [animation-delay:-150ms] motion-reduce:animate-none" />
-                    <span className="size-1.5 animate-bounce rounded-full bg-primary motion-reduce:animate-none" />
-                  </span>
+                <div className="flex items-center justify-between gap-4 text-primary">
                   <span className="text-xs font-bold uppercase">Cruzando suas respostas</span>
+                  <span className="min-w-10 text-right text-sm font-semibold tabular-nums">{progress}%</span>
                 </div>
+                <progress
+                  className="diagnosis-progress mt-3 h-2 w-full overflow-hidden rounded-full"
+                  value={progress}
+                  max={100}
+                  aria-label={`Análise do perfil capilar: ${progress}%`}
+                />
               </div>
 
               <div className="mt-7 flex items-center gap-2 border-t border-border pt-5 text-muted-foreground">
