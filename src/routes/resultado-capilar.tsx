@@ -42,8 +42,8 @@ const degreeProfiles = {
     image: degree1Image,
     level: "Atenção moderada",
     markerClass: "left-[12%]",
-    alert: "Sinais iniciais de afinamento",
-    description: "Seu padrão indica um estágio inicial. Este é um bom momento para adotar uma rotina consistente e cuidar dos fios antes que a queda avance.",
+    alert: "Atenção moderada ao afinamento",
+    description: "Seu padrão já pede atenção. Este é um bom momento para adotar uma rotina consistente e cuidar dos fios antes que a queda avance.",
   },
   2: {
     image: degree2Image,
