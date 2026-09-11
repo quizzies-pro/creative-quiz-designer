@@ -64,7 +64,7 @@ function NameQuestion() {
       <main className="relative flex flex-1 items-start justify-center px-5 pb-12 pt-16 sm:items-center sm:px-8 sm:pb-28 sm:pt-8">
         <section className="w-full max-w-[620px] text-center" aria-labelledby="name-question">
           <p className="text-xs font-semibold uppercase text-primary sm:text-sm">Seu plano personalizado</p>
-          <h1 id="name-question" className="mt-4 font-display text-3xl font-bold uppercase sm:text-4xl lg:text-[42px]">
+          <h1 id="name-question" className="mt-4 font-display text-[28px] font-normal leading-[1.2] sm:text-[34px]">
             Qual é o seu nome?
           </h1>
           <p className="mx-auto mt-4 max-w-md text-sm leading-6 text-muted-foreground sm:text-base">

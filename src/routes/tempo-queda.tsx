@@ -84,7 +84,7 @@ function HairLossDurationQuestion() {
         <section className="w-full max-w-[680px]" aria-labelledby="duration-question">
           <div className="text-center">
             <p className="text-xs font-semibold uppercase text-primary sm:text-sm">Seu histórico capilar</p>
-            <h1 id="duration-question" className="mx-auto mt-4 max-w-[650px] font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-[42px]">
+            <h1 id="duration-question" className="mx-auto mt-4 max-w-[650px] font-display text-[28px] font-normal leading-[1.2] sm:text-[34px]">
               Há quanto tempo você percebe que seu cabelo está caindo ou ficando mais fino?
             </h1>
           </div>
