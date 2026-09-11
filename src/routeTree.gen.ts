@@ -14,6 +14,7 @@ import { Route as CalvicieRouteImport } from './routes/calvicie'
 import { Route as CouroCabeludoRouteImport } from './routes/couro-cabeludo'
 import { Route as DiagnosticoCapilarRouteImport } from './routes/diagnostico-capilar'
 import { Route as EspessuraFiosRouteImport } from './routes/espessura-fios'
+import { Route as FrequenciaCuidadosRouteImport } from './routes/frequencia-cuidados'
 import { Route as MotivacionalRouteImport } from './routes/motivacional'
 import { Route as NomeRouteImport } from './routes/nome'
 import { Route as RegiaoQuedaRouteImport } from './routes/regiao-queda'
@@ -43,6 +44,11 @@ const DiagnosticoCapilarRoute = DiagnosticoCapilarRouteImport.update({
 const EspessuraFiosRoute = EspessuraFiosRouteImport.update({
   id: '/espessura-fios',
   path: '/espessura-fios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrequenciaCuidadosRoute = FrequenciaCuidadosRouteImport.update({
+  id: '/frequencia-cuidados',
+  path: '/frequencia-cuidados',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MotivacionalRoute = MotivacionalRouteImport.update({
@@ -77,6 +83,7 @@ export interface FileRoutesByFullPath {
   '/couro-cabeludo': typeof CouroCabeludoRoute
   '/diagnostico-capilar': typeof DiagnosticoCapilarRoute
   '/espessura-fios': typeof EspessuraFiosRoute
+  '/frequencia-cuidados': typeof FrequenciaCuidadosRoute
   '/motivacional': typeof MotivacionalRoute
   '/nome': typeof NomeRoute
   '/regiao-queda': typeof RegiaoQuedaRoute
@@ -89,6 +96,7 @@ export interface FileRoutesByTo {
   '/couro-cabeludo': typeof CouroCabeludoRoute
   '/diagnostico-capilar': typeof DiagnosticoCapilarRoute
   '/espessura-fios': typeof EspessuraFiosRoute
+  '/frequencia-cuidados': typeof FrequenciaCuidadosRoute
   '/motivacional': typeof MotivacionalRoute
   '/nome': typeof NomeRoute
   '/regiao-queda': typeof RegiaoQuedaRoute
@@ -102,6 +110,7 @@ export interface FileRoutesById {
   '/couro-cabeludo': typeof CouroCabeludoRoute
   '/diagnostico-capilar': typeof DiagnosticoCapilarRoute
   '/espessura-fios': typeof EspessuraFiosRoute
+  '/frequencia-cuidados': typeof FrequenciaCuidadosRoute
   '/motivacional': typeof MotivacionalRoute
   '/nome': typeof NomeRoute
   '/regiao-queda': typeof RegiaoQuedaRoute
@@ -116,6 +125,7 @@ export interface FileRouteTypes {
     | '/couro-cabeludo'
     | '/diagnostico-capilar'
     | '/espessura-fios'
+    | '/frequencia-cuidados'
     | '/motivacional'
     | '/nome'
     | '/regiao-queda'
@@ -128,6 +138,7 @@ export interface FileRouteTypes {
     | '/couro-cabeludo'
     | '/diagnostico-capilar'
     | '/espessura-fios'
+    | '/frequencia-cuidados'
     | '/motivacional'
     | '/nome'
     | '/regiao-queda'
@@ -140,6 +151,7 @@ export interface FileRouteTypes {
     | '/couro-cabeludo'
     | '/diagnostico-capilar'
     | '/espessura-fios'
+    | '/frequencia-cuidados'
     | '/motivacional'
     | '/nome'
     | '/regiao-queda'
@@ -153,6 +165,7 @@ export interface RootRouteChildren {
   CouroCabeludoRoute: typeof CouroCabeludoRoute
   DiagnosticoCapilarRoute: typeof DiagnosticoCapilarRoute
   EspessuraFiosRoute: typeof EspessuraFiosRoute
+  FrequenciaCuidadosRoute: typeof FrequenciaCuidadosRoute
   MotivacionalRoute: typeof MotivacionalRoute
   NomeRoute: typeof NomeRoute
   RegiaoQuedaRoute: typeof RegiaoQuedaRoute
@@ -195,6 +208,13 @@ declare module '@tanstack/react-router' {
       path: '/espessura-fios'
       fullPath: '/espessura-fios'
       preLoaderRoute: typeof EspessuraFiosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/frequencia-cuidados': {
+      id: '/frequencia-cuidados'
+      path: '/frequencia-cuidados'
+      fullPath: '/frequencia-cuidados'
+      preLoaderRoute: typeof FrequenciaCuidadosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/motivacional': {
@@ -241,6 +261,7 @@ const rootRouteChildren: RootRouteChildren = {
   CouroCabeludoRoute: CouroCabeludoRoute,
   DiagnosticoCapilarRoute: DiagnosticoCapilarRoute,
   EspessuraFiosRoute: EspessuraFiosRoute,
+  FrequenciaCuidadosRoute: FrequenciaCuidadosRoute,
   MotivacionalRoute: MotivacionalRoute,
   NomeRoute: NomeRoute,
   RegiaoQuedaRoute: RegiaoQuedaRoute,
