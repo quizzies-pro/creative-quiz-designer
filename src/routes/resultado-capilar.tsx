@@ -138,7 +138,7 @@ function HairResult() {
   ];
 
   return (
-    <div className="quiz-page-background flex min-h-screen flex-col bg-background pb-24 text-foreground sm:pb-28">
+    <div className="quiz-page-background flex min-h-dvh flex-col bg-background pb-24 text-foreground sm:pb-28">
       <header className="relative border-b border-border/70">
         <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[40px_minmax(0,1fr)_40px] items-center gap-3 px-5 sm:px-8 lg:px-12">
           <span aria-hidden="true" />
