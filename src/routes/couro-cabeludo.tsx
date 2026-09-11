@@ -8,21 +8,25 @@ type BaldnessDegree = 1 | 2 | 3 | 4;
 type HairLossDuration = "menos-6-meses" | "6-meses-1-ano" | "1-3-anos" | "mais-3-anos" | "incerto";
 type HairLossArea = "entradas" | "topo" | "coroa" | "entradas-topo" | "varias-regioes";
 type HairThickness = "grossos" | "alguns-finos" | "maioria-fina" | "muito-finos" | "nao-percebo";
+type ScalpCondition = "normal" | "oleoso" | "muito-oleoso" | "seco" | "sensivel" | "nao-sei";
 
 const validDurations: HairLossDuration[] = ["menos-6-meses", "6-meses-1-ano", "1-3-anos", "mais-3-anos", "incerto"];
 const validAreas: HairLossArea[] = ["entradas", "topo", "coroa", "entradas-topo", "varias-regioes"];
 const validThicknesses: HairThickness[] = ["grossos", "alguns-finos", "maioria-fina", "muito-finos", "nao-percebo"];
+const validScalpConditions: ScalpCondition[] = ["normal", "oleoso", "muito-oleoso", "seco", "sensivel", "nao-sei"];
 
-const thicknessOptions: Array<{
-  value: HairThickness;
-  label: string;
-  strands: Array<"thick" | "medium" | "thin">;
+const scalpOptions: Array<{
+  value: ScalpCondition;
+  emoji: string;
+  title: string;
+  description: string;
 }> = [
-  { value: "grossos", label: "Meus fios ainda são grossos", strands: ["thick", "thick", "thick"] },
-  { value: "alguns-finos", label: "Alguns fios estão mais finos", strands: ["thick", "medium", "thick"] },
-  { value: "maioria-fina", label: "A maioria está mais fina", strands: ["medium", "medium", "thick"] },
-  { value: "muito-finos", label: "Meus fios estão muito finos e frágeis", strands: ["thin", "thin", "thin"] },
-  { value: "nao-percebo", label: "Não consigo perceber", strands: [] },
+  { value: "normal", emoji: "🧴", title: "Normal", description: "não é muito oleoso nem seco" },
+  { value: "oleoso", emoji: "✨", title: "Oleoso", description: "fica com aspecto de oleosidade ao longo do dia" },
+  { value: "muito-oleoso", emoji: "💧", title: "Muito oleoso", description: "preciso lavar com frequência" },
+  { value: "seco", emoji: "🌵", title: "Seco", description: "sinto ressecamento ou descamação" },
+  { value: "sensivel", emoji: "🌿", title: "Sensível", description: "sinto coceira, irritação ou desconforto" },
+  { value: "nao-sei", emoji: "🤷", title: "Não sei dizer", description: "" },
 ];
 
 function parseDegree(value: unknown): BaldnessDegree {
@@ -42,47 +46,54 @@ function parseArea(value: unknown): HairLossArea {
     : "entradas";
 }
 
-function parseThickness(value: unknown): HairThickness | undefined {
+function parseThickness(value: unknown): HairThickness {
   return typeof value === "string" && validThicknesses.includes(value as HairThickness)
     ? (value as HairThickness)
+    : "nao-percebo";
+}
+
+function parseScalpCondition(value: unknown): ScalpCondition | undefined {
+  return typeof value === "string" && validScalpConditions.includes(value as ScalpCondition)
+    ? (value as ScalpCondition)
     : undefined;
 }
 
-export const Route = createFileRoute("/espessura-fios")({
+export const Route = createFileRoute("/couro-cabeludo")({
   validateSearch: (search: Record<string, unknown>) => ({
     nome: typeof search["nome"] === "string" ? search["nome"].slice(0, 80).trim() : "",
     grau: parseDegree(search["grau"]),
     tempo: parseDuration(search["tempo"]),
     regiao: parseArea(search["regiao"]),
     espessura: parseThickness(search["espessura"]),
+    couro: parseScalpCondition(search["couro"]),
   }),
   head: () => ({
     meta: [
-      { title: "Espessura dos fios | Stanley’s Care" },
+      { title: "Condição do couro cabeludo | Stanley’s Care" },
       {
         name: "description",
-        content: "Identifique a intensidade do afinamento dos fios para aprofundar sua análise capilar.",
+        content: "Descreva como seu couro cabeludo se apresenta durante a maior parte do dia.",
       },
-      { property: "og:title", content: "Espessura dos fios | Stanley’s Care" },
+      { property: "og:title", content: "Condição do couro cabeludo | Stanley’s Care" },
       {
         property: "og:description",
-        content: "Conte como você percebe a espessura atual dos seus fios.",
+        content: "Identifique a condição atual do seu couro cabeludo para personalizar sua avaliação.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: HairThicknessQuestion,
+  component: ScalpConditionQuestion,
 });
 
-function HairThicknessQuestion() {
-  const { nome, grau, tempo, regiao, espessura } = Route.useSearch();
-  const navigate = useNavigate({ from: "/espessura-fios" });
+function ScalpConditionQuestion() {
+  const { nome, grau, tempo, regiao, espessura, couro } = Route.useSearch();
+  const navigate = useNavigate({ from: "/couro-cabeludo" });
 
-  const selectThickness = (value: HairThickness) => {
+  const selectCondition = (value: ScalpCondition) => {
     void navigate({
-      to: "/couro-cabeludo",
-      search: { nome, grau, tempo, regiao, espessura: value, couro: undefined },
+      search: { nome, grau, tempo, regiao, espessura, couro: value },
+      replace: true,
     });
   };
 
@@ -92,9 +103,9 @@ function HairThicknessQuestion() {
         <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-5 sm:px-8 lg:px-12">
           <Button asChild variant="ghost" size="icon" className="size-10 rounded-full text-muted-foreground hover:bg-secondary hover:text-foreground">
             <Link
-              to="/regiao-queda"
-              search={{ nome, grau, tempo, regiao }}
-              aria-label="Voltar para a escolha da região da queda"
+              to="/espessura-fios"
+              search={{ nome, grau, tempo, regiao, espessura }}
+              aria-label="Voltar para a pergunta sobre a espessura dos fios"
             >
               <ArrowLeft className="size-5" />
             </Link>
@@ -111,26 +122,23 @@ function HairThicknessQuestion() {
             <Menu className="size-5" />
           </Button>
         </div>
-        <div className="absolute inset-x-0 -bottom-px h-1" aria-label="Etapa 7 do questionário">
-          <div className="h-full w-[96%] bg-primary" />
+        <div className="absolute inset-x-0 -bottom-px h-1" aria-label="Etapa 8 do questionário">
+          <div className="h-full w-full bg-primary" />
         </div>
       </header>
 
-      <main className="flex flex-1 items-start justify-center px-5 py-10 sm:px-8 sm:py-14 lg:items-center lg:py-10">
-        <section className="w-full max-w-[700px]" aria-labelledby="thickness-question">
+      <main className="flex flex-1 items-start justify-center px-5 py-9 sm:px-8 sm:py-12 lg:items-center lg:py-9">
+        <section className="w-full max-w-[720px]" aria-labelledby="scalp-question">
           <div className="text-center">
-            <p className="text-xs font-semibold uppercase text-primary sm:text-sm">Intensidade do afinamento</p>
-            <h1 id="thickness-question" className="mx-auto mt-4 max-w-[670px] font-display text-[28px] font-normal leading-[1.2] sm:text-[34px]">
-              Como você percebe a espessura dos seus fios atualmente?
+            <p className="text-xs font-semibold uppercase text-primary sm:text-sm">Saúde do couro cabeludo</p>
+            <h1 id="scalp-question" className="mx-auto mt-4 max-w-[680px] font-display text-[28px] font-normal leading-[1.2] sm:text-[34px]">
+              Como você descreveria seu couro cabeludo na maior parte do dia?
             </h1>
-            <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-muted-foreground sm:text-base">
-              Escolha a opção que mais se aproxima da condição atual dos seus fios.
-            </p>
           </div>
 
           <div className="mt-8 grid gap-3 sm:mt-10">
-            {thicknessOptions.map((option) => {
-              const isSelected = espessura === option.value;
+            {scalpOptions.map((option) => {
+              const isSelected = couro === option.value;
 
               return (
                 <Button
@@ -138,19 +146,13 @@ function HairThicknessQuestion() {
                   type="button"
                   variant="outline"
                   aria-pressed={isSelected}
-                  onClick={() => selectThickness(option.value)}
-                  className="group grid h-auto min-h-[68px] w-full grid-cols-[48px_minmax(0,1fr)_auto] items-center gap-4 rounded-lg border-border bg-card px-4 py-3 text-left text-card-foreground shadow-none transition duration-200 hover:border-primary/70 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-secondary sm:min-h-[76px] sm:grid-cols-[56px_minmax(0,1fr)_auto] sm:px-5"
+                  onClick={() => selectCondition(option.value)}
+                  className="group grid h-auto min-h-[68px] w-full grid-cols-[40px_minmax(0,1fr)_auto] items-center gap-3 rounded-lg border-border bg-card px-4 py-3 text-left text-card-foreground shadow-none transition duration-200 hover:border-primary/70 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-secondary sm:min-h-[74px] sm:grid-cols-[44px_minmax(0,1fr)_auto] sm:gap-4 sm:px-5"
                 >
-                  <span className="flex h-10 items-center justify-center gap-1 rounded-md bg-muted" aria-hidden="true">
-                    {option.strands.length > 0 ? option.strands.map((strand, index) => (
-                      <span
-                        key={`${option.value}-${index}`}
-                        className={`h-6 rounded-full bg-primary ${strand === "thick" ? "w-1" : strand === "medium" ? "w-0.5" : "w-px"}`}
-                      />
-                    )) : <span className="font-display text-lg font-normal text-muted-foreground">?</span>}
-                  </span>
-                  <span className="min-w-0 whitespace-normal text-sm font-semibold leading-5 sm:text-base">
-                    {option.label}
+                  <span className="text-xl sm:text-2xl" aria-hidden="true">{option.emoji}</span>
+                  <span className="min-w-0 whitespace-normal text-sm leading-5 sm:text-base">
+                    <span className="font-semibold">{option.title}</span>
+                    {option.description ? <span className="text-muted-foreground"> — {option.description}</span> : null}
                   </span>
                   <span className="grid size-7 shrink-0 place-items-center rounded-full border border-muted-foreground/60 text-transparent transition group-aria-pressed:border-primary group-aria-pressed:bg-primary group-aria-pressed:text-primary-foreground sm:size-8">
                     <Check className="size-4" aria-hidden="true" />
