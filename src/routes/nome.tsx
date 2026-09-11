@@ -7,6 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 export const Route = createFileRoute("/nome")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    nome: typeof search["nome"] === "string" ? search["nome"].slice(0, 80) : "",
+  }),
   head: () => ({
     meta: [
       { title: "Qual é o seu nome? | Stanley’s Care" },
@@ -27,7 +30,8 @@ export const Route = createFileRoute("/nome")({
 });
 
 function NameQuestion() {
-  const [name, setName] = useState("");
+  const search = Route.useSearch();
+  const [name, setName] = useState(search.nome);
   const canContinue = name.trim().length > 0;
   const navigate = useNavigate();
 
@@ -71,7 +75,12 @@ function NameQuestion() {
             className="mx-auto mt-9 max-w-[520px]"
             onSubmit={(event) => {
               event.preventDefault();
-              if (canContinue) void navigate({ to: "/calvicie" });
+              if (canContinue) {
+                void navigate({
+                  to: "/calvicie",
+                  search: { nome: name.trim() },
+                });
+              }
             }}
           >
             <label htmlFor="name" className="sr-only">Seu nome</label>

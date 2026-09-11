@@ -10,6 +10,9 @@ import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/calvicie")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    nome: typeof search["nome"] === "string" ? search["nome"].slice(0, 80).trim() : "",
+  }),
   head: () => ({
     meta: [
       { title: "Grau de calvície | Stanley’s Care" },
@@ -40,13 +43,14 @@ type BaldnessDegree = (typeof baldnessDegrees)[number]["degree"];
 
 function BaldnessQuestion() {
   const [selectedDegree, setSelectedDegree] = useState<BaldnessDegree | null>(null);
+  const { nome } = Route.useSearch();
 
   return (
     <div className="quiz-page-background relative flex min-h-screen flex-col overflow-hidden bg-background text-foreground">
       <header className="relative border-b border-border/70">
         <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-5 sm:px-8 lg:px-12">
           <Button asChild variant="ghost" size="icon" className="size-10 rounded-full text-muted-foreground hover:bg-secondary hover:text-foreground">
-            <Link to="/nome" aria-label="Voltar para a pergunta de nome">
+            <Link to="/nome" search={{ nome }} aria-label="Voltar para a pergunta de nome">
               <ArrowLeft className="size-5" />
             </Link>
           </Button>
@@ -72,7 +76,7 @@ function BaldnessQuestion() {
           <div className="text-center">
             <p className="text-xs font-semibold uppercase text-primary sm:text-sm">Seu plano personalizado</p>
             <h1 id="baldness-question" className="mt-3 font-display text-3xl font-bold uppercase sm:text-4xl lg:text-[42px]">
-              Qual é o seu grau de calvície?
+              {nome ? `${nome}, qual é o seu grau de calvície?` : "Qual é o seu grau de calvície?"}
             </h1>
             <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-muted-foreground sm:text-base">
               Escolha a imagem que mais se aproxima do seu caso atual.
