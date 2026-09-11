@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Menu } from "lucide-react";
 
+import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
@@ -25,20 +26,38 @@ export const Route = createFileRoute("/")({
 
 function VideoOpening() {
   return (
-    <main className="quiz-page-background flex min-h-screen items-center justify-center bg-background px-4 py-6 text-foreground sm:px-8 sm:py-10">
-      <section className="flex w-full max-w-[420px] flex-col items-center gap-5" aria-label="Introdução ao quiz">
-        <div
-          className="aspect-[9/16] w-full max-h-[calc(100vh-120px)] overflow-hidden rounded-lg border border-border bg-card shadow-2xl"
-          aria-label="Espaço reservado para o vídeo de apresentação"
-        />
-
-        <Button asChild className="h-14 w-full justify-between rounded-lg px-6 text-base font-semibold shadow-lg">
-          <Link to="/idade">
-            Começar agora
-            <ArrowRight className="size-5" aria-hidden="true" />
+    <div className="quiz-page-background flex min-h-screen flex-col bg-background text-foreground">
+      <header className="relative border-b border-border/70">
+        <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[minmax(0,1fr)_auto] items-center px-5 sm:px-8 lg:px-12">
+          <Link to="/" className="min-w-0" aria-label="Stanley’s Care — início">
+            <img src={logoAsset.url} alt="Stanley’s Care" className="h-auto w-[190px] max-w-[58vw]" />
           </Link>
-        </Button>
-      </section>
-    </main>
+          <Button
+            variant="outline"
+            size="icon"
+            className="size-10 shrink-0 rounded-full border-border bg-transparent text-foreground hover:bg-secondary"
+            aria-label="Abrir menu"
+          >
+            <Menu className="size-5" />
+          </Button>
+        </div>
+      </header>
+
+      <main className="flex flex-1 items-center justify-center px-4 py-6 sm:px-8 sm:py-8">
+        <section className="flex w-full max-w-[420px] flex-col items-center gap-5" aria-label="Introdução ao quiz">
+          <div
+            className="aspect-[9/16] w-full max-h-[calc(100vh-190px)] overflow-hidden rounded-lg border border-border bg-card shadow-2xl"
+            aria-label="Espaço reservado para o vídeo de apresentação"
+          />
+
+          <Button asChild className="h-14 w-full justify-between rounded-lg px-6 text-base font-semibold shadow-lg">
+            <Link to="/idade">
+              Começar agora
+              <ArrowRight className="size-5" aria-hidden="true" />
+            </Link>
+          </Button>
+        </section>
+      </main>
+    </div>
   );
 }
