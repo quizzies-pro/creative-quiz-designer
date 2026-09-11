@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CalvicieRouteImport } from './routes/calvicie'
 import { Route as NomeRouteImport } from './routes/nome'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CalvicieRoute = CalvicieRouteImport.update({
+  id: '/calvicie',
+  path: '/calvicie',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NomeRoute = NomeRouteImport.update({
@@ -25,27 +31,31 @@ const NomeRoute = NomeRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/calvicie': typeof CalvicieRoute
   '/nome': typeof NomeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/calvicie': typeof CalvicieRoute
   '/nome': typeof NomeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/calvicie': typeof CalvicieRoute
   '/nome': typeof NomeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/nome'
+  fullPaths: '/' | '/calvicie' | '/nome'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/nome'
-  id: '__root__' | '/' | '/nome'
+  to: '/' | '/calvicie' | '/nome'
+  id: '__root__' | '/' | '/calvicie' | '/nome'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CalvicieRoute: typeof CalvicieRoute
   NomeRoute: typeof NomeRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calvicie': {
+      id: '/calvicie'
+      path: '/calvicie'
+      fullPath: '/calvicie'
+      preLoaderRoute: typeof CalvicieRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/nome': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CalvicieRoute: CalvicieRoute,
   NomeRoute: NomeRoute,
 }
 export const routeTree = rootRouteImport
