@@ -1,6 +1,12 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, Check, Menu } from "lucide-react";
 
+import dryIcon from "@/assets/scalp-icons/dry.svg";
+import normalIcon from "@/assets/scalp-icons/normal.svg";
+import oilyIcon from "@/assets/scalp-icons/oily.svg";
+import sensitiveIcon from "@/assets/scalp-icons/sensitive.svg";
+import unsureIcon from "@/assets/scalp-icons/unsure.svg";
+import veryOilyIcon from "@/assets/scalp-icons/very-oily.svg";
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
 import { Button } from "@/components/ui/button";
 
@@ -17,16 +23,16 @@ const validScalpConditions: ScalpCondition[] = ["normal", "oleoso", "muito-oleos
 
 const scalpOptions: Array<{
   value: ScalpCondition;
-  emoji: string;
+  icon: string;
   title: string;
   description: string;
 }> = [
-  { value: "normal", emoji: "🧴", title: "Normal", description: "não é muito oleoso nem seco" },
-  { value: "oleoso", emoji: "✨", title: "Oleoso", description: "fica com aspecto de oleosidade ao longo do dia" },
-  { value: "muito-oleoso", emoji: "💧", title: "Muito oleoso", description: "preciso lavar com frequência" },
-  { value: "seco", emoji: "🌵", title: "Seco", description: "sinto ressecamento ou descamação" },
-  { value: "sensivel", emoji: "🌿", title: "Sensível", description: "sinto coceira, irritação ou desconforto" },
-  { value: "nao-sei", emoji: "🤷", title: "Não sei dizer", description: "" },
+  { value: "normal", icon: normalIcon, title: "Normal", description: "não é muito oleoso nem seco" },
+  { value: "oleoso", icon: oilyIcon, title: "Oleoso", description: "fica com aspecto de oleosidade ao longo do dia" },
+  { value: "muito-oleoso", icon: veryOilyIcon, title: "Muito oleoso", description: "preciso lavar com frequência" },
+  { value: "seco", icon: dryIcon, title: "Seco", description: "sinto ressecamento ou descamação" },
+  { value: "sensivel", icon: sensitiveIcon, title: "Sensível", description: "sinto coceira, irritação ou desconforto" },
+  { value: "nao-sei", icon: unsureIcon, title: "Não sei dizer", description: "" },
 ];
 
 function parseDegree(value: unknown): BaldnessDegree {
@@ -149,7 +155,9 @@ function ScalpConditionQuestion() {
                   onClick={() => selectCondition(option.value)}
                   className="group grid h-auto min-h-[68px] w-full grid-cols-[40px_minmax(0,1fr)_auto] items-center gap-3 rounded-lg border-border bg-card px-4 py-3 text-left text-card-foreground shadow-none transition duration-200 hover:border-primary/70 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-secondary sm:min-h-[74px] sm:grid-cols-[44px_minmax(0,1fr)_auto] sm:gap-4 sm:px-5"
                 >
-                  <span className="text-xl sm:text-2xl" aria-hidden="true">{option.emoji}</span>
+                  <span className="grid size-9 place-items-center rounded-md bg-muted" aria-hidden="true">
+                    <img src={option.icon} alt="" className="size-5 sm:size-6" />
+                  </span>
                   <span className="min-w-0 whitespace-normal text-sm leading-5 sm:text-base">
                     <span className="font-semibold">{option.title}</span>
                     {option.description ? <span className="text-muted-foreground"> — {option.description}</span> : null}
