@@ -1,8 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, Check, Menu, ScanSearch, ShieldCheck } from "lucide-react";
+import { ArrowLeft, Check, Menu, ScanSearch } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import newsHistoryAsset from "@/assets/noticia-historico-capilar.png.asset.json";
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
 import { QuizProgress } from "@/components/quiz/quiz-progress";
 import { Button } from "@/components/ui/button";
@@ -16,6 +15,13 @@ const validDurations: HairLossDuration[] = [
   "1-3-anos",
   "mais-3-anos",
   "incerto",
+];
+
+const analysisStages = [
+  "Analisando seu histórico de queda",
+  "Mapeando as regiões mais afetadas",
+  "Avaliando a espessura dos fios",
+  "Preparando seu perfil capilar",
 ];
 
 function parseDegree(value: unknown): BaldnessDegree {
@@ -58,6 +64,11 @@ function HairDiagnosisTransition() {
   const { nome, grau, tempo } = Route.useSearch();
   const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
+
+  const stageProgress = (stageIndex: number) =>
+    Math.min(100, Math.max(0, Math.round((progress - stageIndex * 25) * 4)));
+
+  const activeStage = Math.min(Math.floor(progress / 25), analysisStages.length - 1);
 
   useEffect(() => {
     const startedAt = Date.now();
@@ -107,74 +118,54 @@ function HairDiagnosisTransition() {
         <QuizProgress currentStep={6} />
       </header>
 
-      <main className="flex flex-1 items-center px-5 py-10 sm:px-8 sm:py-14 lg:py-12">
-        <section className="mx-auto grid w-full max-w-[1040px] items-center gap-10 lg:grid-cols-[minmax(0,1.08fr)_minmax(360px,0.92fr)] lg:gap-20" aria-labelledby="diagnosis-title">
-          <div className="max-w-[620px]">
-            <p className="text-xs font-semibold uppercase text-primary sm:text-sm">Análise do seu histórico</p>
-            <h1 id="diagnosis-title" className="mt-4 font-display text-[30px] font-normal leading-[1.2] sm:text-[38px]">
-              {nome ? `${nome}, seu histórico já revela algo importante.` : "Seu histórico já revela algo importante."}
+      <main className="flex flex-1 px-5 py-9 sm:px-8 sm:py-12">
+        <section className="mx-auto flex w-full max-w-[680px] flex-col" aria-labelledby="diagnosis-title">
+          <div className="text-center">
+            <p className="text-xs font-semibold uppercase text-primary sm:text-sm">Diagnóstico capilar</p>
+            <h1 id="diagnosis-title" className="mt-3 font-display text-[30px] font-normal leading-[1.2] sm:text-[38px]">
+              {nome ? `${nome}, estamos analisando suas respostas` : "Estamos analisando suas respostas"}
             </h1>
-            <p className="mt-6 text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
-              Quanto maior o tempo de evolução, mais importante é entender o padrão da queda e o nível de afinamento dos fios.
+            <p className="mx-auto mt-4 max-w-[560px] text-sm leading-6 text-muted-foreground sm:text-base">
+              Estamos conectando cada detalhe para entender melhor o momento atual do seu cabelo.
             </p>
-
-            <div className="mt-8 flex items-start gap-4 border-y border-border py-5">
-              <span className="grid size-10 shrink-0 place-items-center rounded-full bg-secondary text-primary" aria-hidden="true">
-                <ScanSearch className="size-5" />
-              </span>
-              <p className="pt-1 text-sm font-medium leading-6 text-foreground sm:text-base">
-                Estamos cruzando suas respostas para identificar o seu perfil capilar.
-              </p>
-            </div>
-
-            <div className="mt-7 flex items-start gap-3">
-              <Check className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden="true" />
-              <p className="text-sm leading-6 text-muted-foreground sm:text-base">
-                <span className="font-semibold text-foreground">Próxima etapa:</span> vamos analisar onde a perda de cabelo está mais concentrada.
-              </p>
-            </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-[430px] overflow-hidden rounded-xl border border-border bg-card" aria-label="Análise do perfil capilar em andamento">
-            <div className="relative aspect-square overflow-hidden bg-muted">
-              <img
-                src={newsHistoryAsset.url}
-                alt="Notícia sobre a importância do histórico da queda e do afinamento dos cabelos"
-                width={768}
-                height={768}
-                className="size-full object-contain"
-              />
-              <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-card to-transparent" />
-              <span className="absolute bottom-4 left-5 rounded-full border border-primary/30 bg-background/85 px-3 py-1 text-xs font-semibold text-primary backdrop-blur-sm">
-                Análise em processamento
-              </span>
-            </div>
+          <div className="mt-9 space-y-6 sm:mt-11 sm:space-y-7" role="status" aria-live="polite" aria-label="Análise do perfil capilar em andamento">
+            {analysisStages.map((stage, index) => {
+              const value = stageProgress(index);
+              const isActive = index === activeStage && progress < 100;
+              const isComplete = value === 100;
 
-            <div className="flex flex-col items-center px-6 pb-7 pt-5 text-center sm:px-8 sm:pb-8">
-              <div>
-                <p className="font-display text-xl font-semibold text-foreground">Processando seu perfil</p>
-                <p className="mx-auto mt-2 max-w-[330px] text-sm leading-6 text-muted-foreground">
-                  Estamos avaliando suas respostas para identificar os principais sinais do seu histórico capilar.
-                </p>
-              </div>
-
-              <div className="mt-7 w-full" role="status" aria-live="polite">
-                <div className="flex items-center justify-between gap-4 text-primary">
-                  <span className="text-xs font-bold uppercase">Cruzando suas respostas</span>
-                  <span className="min-w-10 text-right text-sm font-semibold tabular-nums">{progress}%</span>
+              return (
+                <div key={stage}>
+                  <div className="mb-2.5 flex min-h-6 items-center justify-between gap-4">
+                    <span className={isActive || isComplete ? "text-sm font-medium text-foreground sm:text-base" : "text-sm font-medium text-muted-foreground sm:text-base"}>
+                      {stage}
+                    </span>
+                    {isActive ? (
+                      <span className="min-w-11 text-right text-sm font-semibold tabular-nums text-primary">{value}%</span>
+                    ) : isComplete ? (
+                      <Check className="size-4 shrink-0 text-primary" aria-label="Concluído" />
+                    ) : null}
+                  </div>
+                  <progress
+                    className="diagnosis-progress block h-2 w-full overflow-hidden rounded-full"
+                    value={value}
+                    max={100}
+                    aria-label={`${stage}: ${value}%`}
+                  />
                 </div>
-                <progress
-                  className="diagnosis-progress mt-3 h-2 w-full overflow-hidden rounded-full"
-                  value={progress}
-                  max={100}
-                  aria-label={`Análise do perfil capilar: ${progress}%`}
-                />
-              </div>
+              );
+            })}
+          </div>
 
-              <div className="mt-7 flex items-center gap-2 border-t border-border pt-5 text-muted-foreground">
-                <ShieldCheck className="size-4" aria-hidden="true" />
-                <span className="text-xs font-medium uppercase">Análise segura do seu histórico</span>
-              </div>
+          <div className="mx-auto mt-10 flex items-center gap-4 border-t border-border px-5 pt-7 text-left sm:mt-12 sm:px-8">
+            <span className="grid size-11 shrink-0 place-items-center rounded-full bg-secondary text-primary" aria-hidden="true">
+              <ScanSearch className="size-5" />
+            </span>
+            <div>
+              <p className="text-sm font-semibold text-foreground">Construindo seu perfil capilar</p>
+              <p className="mt-1 text-xs leading-5 text-muted-foreground">A próxima pergunta ajuda a localizar onde o afinamento está mais concentrado.</p>
             </div>
           </div>
         </section>
