@@ -17,6 +17,7 @@ import { Route as EspessuraFiosRouteImport } from './routes/espessura-fios'
 import { Route as FrequenciaCuidadosRouteImport } from './routes/frequencia-cuidados'
 import { Route as MotivacionalRouteImport } from './routes/motivacional'
 import { Route as NomeRouteImport } from './routes/nome'
+import { Route as PeriodoAfinamentoRouteImport } from './routes/periodo-afinamento'
 import { Route as RegiaoQuedaRouteImport } from './routes/regiao-queda'
 import { Route as TempoQuedaRouteImport } from './routes/tempo-queda'
 import { Route as TratamentoAnteriorRouteImport } from './routes/tratamento-anterior'
@@ -61,6 +62,11 @@ const NomeRoute = NomeRouteImport.update({
   path: '/nome',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PeriodoAfinamentoRoute = PeriodoAfinamentoRouteImport.update({
+  id: '/periodo-afinamento',
+  path: '/periodo-afinamento',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RegiaoQuedaRoute = RegiaoQuedaRouteImport.update({
   id: '/regiao-queda',
   path: '/regiao-queda',
@@ -86,6 +92,7 @@ export interface FileRoutesByFullPath {
   '/frequencia-cuidados': typeof FrequenciaCuidadosRoute
   '/motivacional': typeof MotivacionalRoute
   '/nome': typeof NomeRoute
+  '/periodo-afinamento': typeof PeriodoAfinamentoRoute
   '/regiao-queda': typeof RegiaoQuedaRoute
   '/tempo-queda': typeof TempoQuedaRoute
   '/tratamento-anterior': typeof TratamentoAnteriorRoute
@@ -99,6 +106,7 @@ export interface FileRoutesByTo {
   '/frequencia-cuidados': typeof FrequenciaCuidadosRoute
   '/motivacional': typeof MotivacionalRoute
   '/nome': typeof NomeRoute
+  '/periodo-afinamento': typeof PeriodoAfinamentoRoute
   '/regiao-queda': typeof RegiaoQuedaRoute
   '/tempo-queda': typeof TempoQuedaRoute
   '/tratamento-anterior': typeof TratamentoAnteriorRoute
@@ -113,6 +121,7 @@ export interface FileRoutesById {
   '/frequencia-cuidados': typeof FrequenciaCuidadosRoute
   '/motivacional': typeof MotivacionalRoute
   '/nome': typeof NomeRoute
+  '/periodo-afinamento': typeof PeriodoAfinamentoRoute
   '/regiao-queda': typeof RegiaoQuedaRoute
   '/tempo-queda': typeof TempoQuedaRoute
   '/tratamento-anterior': typeof TratamentoAnteriorRoute
@@ -128,6 +137,7 @@ export interface FileRouteTypes {
     | '/frequencia-cuidados'
     | '/motivacional'
     | '/nome'
+    | '/periodo-afinamento'
     | '/regiao-queda'
     | '/tempo-queda'
     | '/tratamento-anterior'
@@ -141,6 +151,7 @@ export interface FileRouteTypes {
     | '/frequencia-cuidados'
     | '/motivacional'
     | '/nome'
+    | '/periodo-afinamento'
     | '/regiao-queda'
     | '/tempo-queda'
     | '/tratamento-anterior'
@@ -154,6 +165,7 @@ export interface FileRouteTypes {
     | '/frequencia-cuidados'
     | '/motivacional'
     | '/nome'
+    | '/periodo-afinamento'
     | '/regiao-queda'
     | '/tempo-queda'
     | '/tratamento-anterior'
@@ -168,6 +180,7 @@ export interface RootRouteChildren {
   FrequenciaCuidadosRoute: typeof FrequenciaCuidadosRoute
   MotivacionalRoute: typeof MotivacionalRoute
   NomeRoute: typeof NomeRoute
+  PeriodoAfinamentoRoute: typeof PeriodoAfinamentoRoute
   RegiaoQuedaRoute: typeof RegiaoQuedaRoute
   TempoQuedaRoute: typeof TempoQuedaRoute
   TratamentoAnteriorRoute: typeof TratamentoAnteriorRoute
@@ -231,6 +244,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NomeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/periodo-afinamento': {
+      id: '/periodo-afinamento'
+      path: '/periodo-afinamento'
+      fullPath: '/periodo-afinamento'
+      preLoaderRoute: typeof PeriodoAfinamentoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/regiao-queda': {
       id: '/regiao-queda'
       path: '/regiao-queda'
@@ -264,6 +284,7 @@ const rootRouteChildren: RootRouteChildren = {
   FrequenciaCuidadosRoute: FrequenciaCuidadosRoute,
   MotivacionalRoute: MotivacionalRoute,
   NomeRoute: NomeRoute,
+  PeriodoAfinamentoRoute: PeriodoAfinamentoRoute,
   RegiaoQuedaRoute: RegiaoQuedaRoute,
   TempoQuedaRoute: TempoQuedaRoute,
   TratamentoAnteriorRoute: TratamentoAnteriorRoute,
