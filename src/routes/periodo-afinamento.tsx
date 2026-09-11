@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, CalendarDays, CalendarRange, Check, Menu } from "lucide-react";
+import { ArrowLeft, CalendarClock, CalendarDays, CalendarRange, CalendarSync, Check, Menu } from "lucide-react";
 
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
 import { Button } from "@/components/ui/button";
@@ -11,7 +11,7 @@ type HairThickness = "grossos" | "alguns-finos" | "maioria-fina" | "muito-finos"
 type ScalpCondition = "normal" | "oleoso" | "muito-oleoso" | "seco" | "sensivel" | "nao-sei";
 type PreviousTreatment = "nunca" | "shampoos-locoes" | "vitaminas-suplementos" | "indicado-profissional" | "varios" | "atualmente";
 type CareFrequency = "todos-dias" | "algumas-vezes-semana" | "raramente" | "praticamente-nunca" | "sem-rotina";
-type PerceivedPeriod = "dias" | "meses";
+type PerceivedPeriod = "dias" | "meses" | "um-ano" | "mais-de-um-ano";
 
 const validDurations: HairLossDuration[] = ["menos-6-meses", "6-meses-1-ano", "1-3-anos", "mais-3-anos", "incerto"];
 const validAreas: HairLossArea[] = ["entradas", "topo", "coroa", "entradas-topo", "varias-regioes"];
@@ -19,11 +19,13 @@ const validThicknesses: HairThickness[] = ["grossos", "alguns-finos", "maioria-f
 const validScalpConditions: ScalpCondition[] = ["normal", "oleoso", "muito-oleoso", "seco", "sensivel", "nao-sei"];
 const validTreatments: PreviousTreatment[] = ["nunca", "shampoos-locoes", "vitaminas-suplementos", "indicado-profissional", "varios", "atualmente"];
 const validFrequencies: CareFrequency[] = ["todos-dias", "algumas-vezes-semana", "raramente", "praticamente-nunca", "sem-rotina"];
-const validPeriods: PerceivedPeriod[] = ["dias", "meses"];
+const validPeriods: PerceivedPeriod[] = ["dias", "meses", "um-ano", "mais-de-um-ano"];
 
 const periodOptions = [
   { value: "dias" as const, label: "Dias", icon: CalendarDays },
   { value: "meses" as const, label: "Meses", icon: CalendarRange },
+  { value: "um-ano" as const, label: "1 ano", icon: CalendarClock },
+  { value: "mais-de-um-ano" as const, label: "Mais de 1 ano", icon: CalendarSync },
 ];
 
 function parseDegree(value: unknown): BaldnessDegree {
@@ -56,7 +58,7 @@ export const Route = createFileRoute("/periodo-afinamento")({
   head: () => ({
     meta: [
       { title: "Período do afinamento capilar | Stanley’s Care" },
-      { name: "description", content: "Informe se você percebe o afinamento ou a queda dos cabelos há dias ou meses." },
+      { name: "description", content: "Informe se você percebe o afinamento ou a queda dos cabelos há dias, meses ou anos." },
       { property: "og:title", content: "Período do afinamento capilar | Stanley’s Care" },
       { property: "og:description", content: "Identifique há quanto tempo o afinamento ou a queda se tornou perceptível." },
       { property: "og:type", content: "website" },
