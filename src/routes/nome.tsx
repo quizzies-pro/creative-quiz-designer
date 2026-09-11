@@ -32,7 +32,7 @@ function NameQuestion() {
 
   return (
     <div className="quiz-page-background relative flex min-h-screen flex-col overflow-hidden bg-background text-foreground">
-      <header className="border-b border-border/70">
+      <header className="relative border-b border-border/70">
         <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-5 sm:px-8 lg:px-12">
           <Button asChild variant="ghost" size="icon" className="size-10 rounded-full text-muted-foreground hover:bg-secondary hover:text-foreground">
             <Link to="/" aria-label="Voltar para escolha de idade">
@@ -51,13 +51,10 @@ function NameQuestion() {
             <Menu className="size-5" />
           </Button>
         </div>
-      </header>
-
-      <div className="mx-auto w-full max-w-[1440px] px-5 pt-5 sm:px-8 lg:px-12">
-        <div className="h-1 overflow-hidden rounded-full bg-secondary" aria-label="Etapa 2 do questionário">
-          <div className="h-full w-1/4 rounded-full bg-primary" />
+        <div className="absolute inset-x-0 -bottom-px h-1" aria-label="Etapa 2 do questionário">
+          <div className="h-full w-1/4 bg-primary" />
         </div>
-      </div>
+      </header>
 
       <main className="relative flex flex-1 items-start justify-center px-5 pb-12 pt-16 sm:items-center sm:px-8 sm:pb-28 sm:pt-8">
         <section className="w-full max-w-[620px] text-center" aria-labelledby="name-question">
