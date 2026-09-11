@@ -81,7 +81,7 @@ function Index() {
                   variant="outline"
                   aria-pressed={isSelected}
                   onClick={() => setSelectedAge(label)}
-                  className="group relative aspect-[0.88] h-auto min-w-0 overflow-hidden rounded-2xl border-border bg-card p-0 text-left text-card-foreground shadow-none transition duration-300 hover:-translate-y-1 hover:border-primary/70 hover:bg-card focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-card"
+                  className="group relative aspect-[0.76] h-auto min-w-0 overflow-hidden rounded-2xl border-border bg-card p-0 text-left text-card-foreground shadow-none transition duration-300 hover:-translate-y-1 hover:border-primary/70 hover:bg-card focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-card"
                 >
                   <span className="absolute inset-0 overflow-hidden bg-secondary">
                     <img
