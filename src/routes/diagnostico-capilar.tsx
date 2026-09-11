@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Activity, ArrowLeft, Check, Menu, ScanSearch } from "lucide-react";
+import { ArrowLeft, Check, LoaderCircle, Menu, ScanSearch } from "lucide-react";
 
+import newsHistoryAsset from "@/assets/noticia-historico-capilar.png.asset.json";
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
 import { Button } from "@/components/ui/button";
 
@@ -108,33 +109,38 @@ function HairDiagnosisTransition() {
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-[430px] overflow-hidden rounded-xl border border-border bg-card p-6 sm:p-8" aria-label="Representação da análise do perfil capilar">
-            <div className="flex items-center justify-between border-b border-border pb-5">
+          <div className="relative mx-auto w-full max-w-[430px] overflow-hidden rounded-xl border border-border bg-card" aria-label="Análise do perfil capilar em andamento">
+            <div className="relative aspect-square overflow-hidden bg-muted">
+              <img
+                src={newsHistoryAsset.url}
+                alt="Notícia sobre a importância do histórico da queda e do afinamento dos cabelos"
+                width={768}
+                height={768}
+                className="size-full object-cover"
+              />
+              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-card to-transparent" />
+            </div>
+
+            <div className="p-6 sm:p-7">
+              <div className="flex items-center justify-between border-b border-border pb-5">
               <div>
                 <p className="text-xs font-semibold uppercase text-muted-foreground">Perfil capilar</p>
                 <p className="mt-1 font-display text-lg font-medium">Análise em andamento</p>
               </div>
               <span className="grid size-11 place-items-center rounded-full bg-secondary text-primary">
-                <Activity className="size-5" />
+                <LoaderCircle className="size-5 animate-spin motion-reduce:animate-none" />
               </span>
-            </div>
+              </div>
 
-            <div className="relative mx-auto my-9 grid aspect-square w-[72%] place-items-center rounded-full border border-border bg-background/50">
-              <div className="absolute inset-[12%] rounded-full border border-primary/30" />
-              <div className="absolute inset-x-[4%] top-1/2 h-px bg-primary/40" />
-              <div className="absolute inset-y-[4%] left-1/2 w-px bg-primary/40" />
-              <ScanSearch className="relative size-20 text-primary" strokeWidth={1.25} />
-              <span className="absolute right-[15%] top-[20%] size-2 rounded-full bg-primary" />
-              <span className="absolute bottom-[22%] left-[18%] size-1.5 rounded-full bg-muted-foreground" />
-            </div>
-
-            <div className="grid grid-cols-3 gap-3 border-t border-border pt-5 text-center">
-              {['Histórico', 'Padrão', 'Fios'].map((item) => (
-                <div key={item}>
-                  <span className="mx-auto block h-1 w-full rounded-full bg-primary/70" />
-                  <span className="mt-2 block text-xs font-medium text-muted-foreground">{item}</span>
+              <div className="mt-5" role="status" aria-live="polite">
+                <div className="h-1.5 overflow-hidden rounded-full bg-secondary">
+                  <div className="h-full w-2/3 animate-pulse rounded-full bg-primary motion-reduce:animate-none" />
                 </div>
-              ))}
+                <div className="mt-3 flex items-center justify-between gap-4 text-xs text-muted-foreground">
+                  <span>Cruzando suas respostas</span>
+                  <span className="shrink-0 font-semibold text-primary">Analisando...</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
