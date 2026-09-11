@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, Check, Menu, ScanSearch } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -69,6 +69,7 @@ export const Route = createFileRoute("/analise-final")({
 
 function FinalAnalysis() {
   const search = Route.useSearch();
+  const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
   const stageProgress = (index: number) => Math.min(100, Math.max(0, Math.round((progress - index * 25) * 4)));
   const activeStage = Math.min(Math.floor(progress / 25), analysisStages.length - 1);
@@ -83,6 +84,20 @@ function FinalAnalysis() {
     }, 40);
     return () => window.clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    if (progress < 100) return;
+
+    const transitionTimer = window.setTimeout(() => {
+      void navigate({
+        to: "/resultado-capilar",
+        search,
+        replace: true,
+      });
+    }, 350);
+
+    return () => window.clearTimeout(transitionTimer);
+  }, [navigate, progress, search]);
 
   return (
     <div className="quiz-page-background flex min-h-screen flex-col bg-background text-foreground">

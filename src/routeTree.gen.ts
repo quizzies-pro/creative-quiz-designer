@@ -21,6 +21,7 @@ import { Route as NomeRouteImport } from './routes/nome'
 import { Route as ObjetivoPrincipalRouteImport } from './routes/objetivo-principal'
 import { Route as PeriodoAfinamentoRouteImport } from './routes/periodo-afinamento'
 import { Route as RegiaoQuedaRouteImport } from './routes/regiao-queda'
+import { Route as ResultadoCapilarRouteImport } from './routes/resultado-capilar'
 import { Route as TempoQuedaRouteImport } from './routes/tempo-queda'
 import { Route as TratamentoAnteriorRouteImport } from './routes/tratamento-anterior'
 
@@ -84,6 +85,11 @@ const RegiaoQuedaRoute = RegiaoQuedaRouteImport.update({
   path: '/regiao-queda',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResultadoCapilarRoute = ResultadoCapilarRouteImport.update({
+  id: '/resultado-capilar',
+  path: '/resultado-capilar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TempoQuedaRoute = TempoQuedaRouteImport.update({
   id: '/tempo-queda',
   path: '/tempo-queda',
@@ -108,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/objetivo-principal': typeof ObjetivoPrincipalRoute
   '/periodo-afinamento': typeof PeriodoAfinamentoRoute
   '/regiao-queda': typeof RegiaoQuedaRoute
+  '/resultado-capilar': typeof ResultadoCapilarRoute
   '/tempo-queda': typeof TempoQuedaRoute
   '/tratamento-anterior': typeof TratamentoAnteriorRoute
 }
@@ -124,6 +131,7 @@ export interface FileRoutesByTo {
   '/objetivo-principal': typeof ObjetivoPrincipalRoute
   '/periodo-afinamento': typeof PeriodoAfinamentoRoute
   '/regiao-queda': typeof RegiaoQuedaRoute
+  '/resultado-capilar': typeof ResultadoCapilarRoute
   '/tempo-queda': typeof TempoQuedaRoute
   '/tratamento-anterior': typeof TratamentoAnteriorRoute
 }
@@ -141,6 +149,7 @@ export interface FileRoutesById {
   '/objetivo-principal': typeof ObjetivoPrincipalRoute
   '/periodo-afinamento': typeof PeriodoAfinamentoRoute
   '/regiao-queda': typeof RegiaoQuedaRoute
+  '/resultado-capilar': typeof ResultadoCapilarRoute
   '/tempo-queda': typeof TempoQuedaRoute
   '/tratamento-anterior': typeof TratamentoAnteriorRoute
 }
@@ -159,6 +168,7 @@ export interface FileRouteTypes {
     | '/objetivo-principal'
     | '/periodo-afinamento'
     | '/regiao-queda'
+    | '/resultado-capilar'
     | '/tempo-queda'
     | '/tratamento-anterior'
   fileRoutesByTo: FileRoutesByTo
@@ -175,6 +185,7 @@ export interface FileRouteTypes {
     | '/objetivo-principal'
     | '/periodo-afinamento'
     | '/regiao-queda'
+    | '/resultado-capilar'
     | '/tempo-queda'
     | '/tratamento-anterior'
   id:
@@ -191,6 +202,7 @@ export interface FileRouteTypes {
     | '/objetivo-principal'
     | '/periodo-afinamento'
     | '/regiao-queda'
+    | '/resultado-capilar'
     | '/tempo-queda'
     | '/tratamento-anterior'
   fileRoutesById: FileRoutesById
@@ -208,6 +220,7 @@ export interface RootRouteChildren {
   ObjetivoPrincipalRoute: typeof ObjetivoPrincipalRoute
   PeriodoAfinamentoRoute: typeof PeriodoAfinamentoRoute
   RegiaoQuedaRoute: typeof RegiaoQuedaRoute
+  ResultadoCapilarRoute: typeof ResultadoCapilarRoute
   TempoQuedaRoute: typeof TempoQuedaRoute
   TratamentoAnteriorRoute: typeof TratamentoAnteriorRoute
 }
@@ -298,6 +311,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegiaoQuedaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/resultado-capilar': {
+      id: '/resultado-capilar'
+      path: '/resultado-capilar'
+      fullPath: '/resultado-capilar'
+      preLoaderRoute: typeof ResultadoCapilarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tempo-queda': {
       id: '/tempo-queda'
       path: '/tempo-queda'
@@ -328,6 +348,7 @@ const rootRouteChildren: RootRouteChildren = {
   ObjetivoPrincipalRoute: ObjetivoPrincipalRoute,
   PeriodoAfinamentoRoute: PeriodoAfinamentoRoute,
   RegiaoQuedaRoute: RegiaoQuedaRoute,
+  ResultadoCapilarRoute: ResultadoCapilarRoute,
   TempoQuedaRoute: TempoQuedaRoute,
   TratamentoAnteriorRoute: TratamentoAnteriorRoute,
 }
