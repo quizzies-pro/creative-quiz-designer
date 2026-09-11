@@ -98,8 +98,8 @@ function ScalpConditionQuestion() {
 
   const selectCondition = (value: ScalpCondition) => {
     void navigate({
-      search: { nome, grau, tempo, regiao, espessura, couro: value },
-      replace: true,
+      to: "/tratamento-anterior",
+      search: { nome, grau, tempo, regiao, espessura, couro: value, tratamento: undefined },
     });
   };
 
