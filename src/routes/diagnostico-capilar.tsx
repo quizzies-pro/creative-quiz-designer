@@ -110,13 +110,13 @@ function HairDiagnosisTransition() {
           </div>
 
           <div className="relative mx-auto w-full max-w-[430px] overflow-hidden rounded-xl border border-border bg-card" aria-label="Análise do perfil capilar em andamento">
-            <div className="relative aspect-video overflow-hidden bg-muted">
+            <div className="relative aspect-square overflow-hidden bg-muted">
               <img
                 src={newsHistoryAsset.url}
                 alt="Notícia sobre a importância do histórico da queda e do afinamento dos cabelos"
                 width={768}
                 height={768}
-                className="size-full object-cover"
+                className="size-full object-contain"
               />
               <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-card to-transparent" />
               <span className="absolute bottom-4 left-5 rounded-full border border-primary/30 bg-background/85 px-3 py-1 text-xs font-semibold text-primary backdrop-blur-sm">
