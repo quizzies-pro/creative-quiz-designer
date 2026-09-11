@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CalvicieRouteImport } from './routes/calvicie'
 import { Route as MotivacionalRouteImport } from './routes/motivacional'
 import { Route as NomeRouteImport } from './routes/nome'
+import { Route as TempoQuedaRouteImport } from './routes/tempo-queda'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +35,25 @@ const NomeRoute = NomeRouteImport.update({
   path: '/nome',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TempoQuedaRoute = TempoQuedaRouteImport.update({
+  id: '/tempo-queda',
+  path: '/tempo-queda',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/calvicie': typeof CalvicieRoute
   '/motivacional': typeof MotivacionalRoute
   '/nome': typeof NomeRoute
+  '/tempo-queda': typeof TempoQuedaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/calvicie': typeof CalvicieRoute
   '/motivacional': typeof MotivacionalRoute
   '/nome': typeof NomeRoute
+  '/tempo-queda': typeof TempoQuedaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,15 @@ export interface FileRoutesById {
   '/calvicie': typeof CalvicieRoute
   '/motivacional': typeof MotivacionalRoute
   '/nome': typeof NomeRoute
+  '/tempo-queda': typeof TempoQuedaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/calvicie' | '/motivacional' | '/nome'
+  fullPaths: '/' | '/calvicie' | '/motivacional' | '/nome' | '/tempo-queda'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/calvicie' | '/motivacional' | '/nome'
-  id: '__root__' | '/' | '/calvicie' | '/motivacional' | '/nome'
+  to: '/' | '/calvicie' | '/motivacional' | '/nome' | '/tempo-queda'
+  id:
+    '__root__' | '/' | '/calvicie' | '/motivacional' | '/nome' | '/tempo-queda'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +77,7 @@ export interface RootRouteChildren {
   CalvicieRoute: typeof CalvicieRoute
   MotivacionalRoute: typeof MotivacionalRoute
   NomeRoute: typeof NomeRoute
+  TempoQuedaRoute: typeof TempoQuedaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +110,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NomeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tempo-queda': {
+      id: '/tempo-queda'
+      path: '/tempo-queda'
+      fullPath: '/tempo-queda'
+      preLoaderRoute: typeof TempoQuedaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +125,7 @@ const rootRouteChildren: RootRouteChildren = {
   CalvicieRoute: CalvicieRoute,
   MotivacionalRoute: MotivacionalRoute,
   NomeRoute: NomeRoute,
+  TempoQuedaRoute: TempoQuedaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
