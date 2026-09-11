@@ -138,7 +138,7 @@ function HairResult() {
   ];
 
   return (
-    <div className="quiz-page-background flex min-h-screen flex-col bg-background text-foreground">
+    <div className="quiz-page-background flex min-h-screen flex-col bg-background pb-24 text-foreground sm:pb-28">
       <header className="relative border-b border-border/70">
         <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[40px_minmax(0,1fr)_40px] items-center gap-3 px-5 sm:px-8 lg:px-12">
           <span aria-hidden="true" />
@@ -207,10 +207,6 @@ function HairResult() {
                 <div className="inline-flex rounded-md border border-primary/50 bg-card/90 px-3 py-1 text-xs font-semibold uppercase text-primary backdrop-blur-sm">Grau {search.grau}</div>
                 <h2 className="mt-3 max-w-md font-display text-2xl font-normal leading-tight sm:text-3xl">{profile.level}</h2>
                 <p className="mt-2 max-w-md text-sm leading-6 text-muted-foreground">Seu perfil indica que uma rotina Stanley’s Care direcionada ao seu momento é o próximo passo recomendado.</p>
-                <Button className="mt-5 h-12 w-full justify-between rounded-lg px-5 sm:w-auto sm:min-w-[290px]">
-                  Quero iniciar meu cuidado
-                  <ArrowRight className="size-5" />
-                </Button>
               </div>
             </div>
           </div>
@@ -220,6 +216,13 @@ function HairResult() {
           </p>
         </section>
       </main>
+
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-primary/30 bg-background/95 px-4 py-3 shadow-[0_-12px_32px_hsl(var(--background)/0.72)] backdrop-blur-xl sm:px-8 sm:py-4">
+        <Button className="mx-auto flex h-14 w-full max-w-[520px] justify-between rounded-lg px-6 text-base font-semibold shadow-[0_0_28px_hsl(var(--primary)/0.32)] transition-transform hover:scale-[1.01] sm:h-16 sm:text-lg">
+          Quero iniciar meu cuidado
+          <ArrowRight className="size-5" />
+        </Button>
+      </div>
     </div>
   );
 }
