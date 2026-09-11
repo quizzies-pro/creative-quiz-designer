@@ -158,4 +158,28 @@
     );
     background-repeat: no-repeat;
   }
+
+  .diagnosis-loading-bar {
+    animation: diagnosis-loading 2.2s ease-in-out infinite;
+    box-shadow: 0 0 14px color-mix(in oklch, var(--primary) 45%, transparent);
+  }
+}
+
+@keyframes diagnosis-loading {
+  0% {
+    transform: translateX(-105%);
+  }
+  50% {
+    transform: translateX(105%);
+  }
+  100% {
+    transform: translateX(-105%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .diagnosis-loading-bar {
+    animation: none;
+    transform: translateX(50%);
+  }
 }
