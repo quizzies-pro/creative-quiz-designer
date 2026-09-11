@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CalvicieRouteImport } from './routes/calvicie'
+import { Route as CouroCabeludoRouteImport } from './routes/couro-cabeludo'
 import { Route as DiagnosticoCapilarRouteImport } from './routes/diagnostico-capilar'
 import { Route as EspessuraFiosRouteImport } from './routes/espessura-fios'
 import { Route as MotivacionalRouteImport } from './routes/motivacional'
@@ -26,6 +27,11 @@ const IndexRoute = IndexRouteImport.update({
 const CalvicieRoute = CalvicieRouteImport.update({
   id: '/calvicie',
   path: '/calvicie',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CouroCabeludoRoute = CouroCabeludoRouteImport.update({
+  id: '/couro-cabeludo',
+  path: '/couro-cabeludo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DiagnosticoCapilarRoute = DiagnosticoCapilarRouteImport.update({
@@ -62,6 +68,7 @@ const TempoQuedaRoute = TempoQuedaRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/calvicie': typeof CalvicieRoute
+  '/couro-cabeludo': typeof CouroCabeludoRoute
   '/diagnostico-capilar': typeof DiagnosticoCapilarRoute
   '/espessura-fios': typeof EspessuraFiosRoute
   '/motivacional': typeof MotivacionalRoute
@@ -72,6 +79,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/calvicie': typeof CalvicieRoute
+  '/couro-cabeludo': typeof CouroCabeludoRoute
   '/diagnostico-capilar': typeof DiagnosticoCapilarRoute
   '/espessura-fios': typeof EspessuraFiosRoute
   '/motivacional': typeof MotivacionalRoute
@@ -83,6 +91,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/calvicie': typeof CalvicieRoute
+  '/couro-cabeludo': typeof CouroCabeludoRoute
   '/diagnostico-capilar': typeof DiagnosticoCapilarRoute
   '/espessura-fios': typeof EspessuraFiosRoute
   '/motivacional': typeof MotivacionalRoute
@@ -95,6 +104,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/calvicie'
+    | '/couro-cabeludo'
     | '/diagnostico-capilar'
     | '/espessura-fios'
     | '/motivacional'
@@ -105,6 +115,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/calvicie'
+    | '/couro-cabeludo'
     | '/diagnostico-capilar'
     | '/espessura-fios'
     | '/motivacional'
@@ -115,6 +126,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/calvicie'
+    | '/couro-cabeludo'
     | '/diagnostico-capilar'
     | '/espessura-fios'
     | '/motivacional'
@@ -126,6 +138,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CalvicieRoute: typeof CalvicieRoute
+  CouroCabeludoRoute: typeof CouroCabeludoRoute
   DiagnosticoCapilarRoute: typeof DiagnosticoCapilarRoute
   EspessuraFiosRoute: typeof EspessuraFiosRoute
   MotivacionalRoute: typeof MotivacionalRoute
@@ -148,6 +161,13 @@ declare module '@tanstack/react-router' {
       path: '/calvicie'
       fullPath: '/calvicie'
       preLoaderRoute: typeof CalvicieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/couro-cabeludo': {
+      id: '/couro-cabeludo'
+      path: '/couro-cabeludo'
+      fullPath: '/couro-cabeludo'
+      preLoaderRoute: typeof CouroCabeludoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/diagnostico-capilar': {
@@ -198,6 +218,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CalvicieRoute: CalvicieRoute,
+  CouroCabeludoRoute: CouroCabeludoRoute,
   DiagnosticoCapilarRoute: DiagnosticoCapilarRoute,
   EspessuraFiosRoute: EspessuraFiosRoute,
   MotivacionalRoute: MotivacionalRoute,
