@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, Menu } from "lucide-react";
 
-import motivationalMen from "@/assets/motivational-men.jpg";
+import motivationalMenAsset from "@/assets/motivational-men.jpg.asset.json";
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
 import { Button } from "@/components/ui/button";
 
@@ -114,10 +114,10 @@ function MotivationalPage() {
 
           <div className="relative aspect-[4/3] min-h-0 overflow-hidden rounded-2xl border border-border bg-card">
             <img
-              src={motivationalMen}
+              src={motivationalMenAsset.url}
               alt="Três homens em diferentes fases da vida que decidiram cuidar dos cabelos"
-              width={1408}
-              height={1056}
+              width={2400}
+              height={1792}
               className="size-full object-cover"
             />
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-background/60 to-transparent" />
