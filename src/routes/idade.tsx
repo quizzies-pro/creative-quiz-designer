@@ -2,10 +2,10 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ArrowRight, CircleHelp, Menu } from "lucide-react";
 import { useState } from "react";
 
-import age1829Asset from "@/assets/age-18-29.jpg.asset.json";
-import age3039Asset from "@/assets/age-30-39.jpg.asset.json";
-import age4049Asset from "@/assets/age-40-49.jpg.asset.json";
-import age50PlusAsset from "@/assets/age-50-plus.jpg.asset.json";
+import age1829Image from "@/assets/optimized/age-18-29.webp";
+import age3039Image from "@/assets/optimized/age-30-39.webp";
+import age4049Image from "@/assets/optimized/age-40-49.webp";
+import age50PlusImage from "@/assets/optimized/age-50-plus.webp";
 import { QuizProgress } from "@/components/quiz/quiz-progress";
 import { Button } from "@/components/ui/button";
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
@@ -31,10 +31,10 @@ export const Route = createFileRoute("/idade")({
 });
 
 const ageRanges = [
-  { label: "18–29", image: age1829Asset.url },
-  { label: "30–39", image: age3039Asset.url },
-  { label: "40–49", image: age4049Asset.url },
-  { label: "50+", image: age50PlusAsset.url },
+  { label: "18–29", image: age1829Image },
+  { label: "30–39", image: age3039Image },
+  { label: "40–49", image: age4049Image },
+  { label: "50+", image: age50PlusImage },
 ] as const;
 
 type AgeRange = (typeof ageRanges)[number]["label"];
@@ -44,12 +44,12 @@ function AgeQuestion() {
   const navigate = useNavigate();
 
   return (
-    <div className="quiz-page-background relative flex min-h-screen flex-col overflow-hidden bg-background text-foreground">
+    <div className="quiz-page-background relative flex min-h-dvh flex-col bg-background text-foreground">
       <header className="relative border-b border-border/70">
         <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[minmax(0,1fr)_auto] items-center px-5 sm:px-8 lg:px-12">
-          <a href="/" className="min-w-0" aria-label="Stanley’s Care — início">
+          <Link to="/" className="min-w-0" aria-label="Stanley’s Care — início">
             <img src={logoAsset.url} alt="Stanley’s Care" className="h-auto w-[190px] max-w-[58vw]" />
-          </a>
+          </Link>
           <Button
             variant="outline"
             size="icon"
@@ -93,6 +93,10 @@ function AgeQuestion() {
                     <img
                       src={image}
                       alt={`Homem representando a faixa etária de ${label} anos`}
+                      width={640}
+                      height={857}
+                      loading="eager"
+                      decoding="async"
                       className="size-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.025]"
                     />
                   </span>

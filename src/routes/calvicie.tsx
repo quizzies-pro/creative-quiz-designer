@@ -2,10 +2,10 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, CircleHelp, Menu } from "lucide-react";
 import { useState } from "react";
 
-import degree1Asset from "@/assets/baldness-degree-1.jpg.asset.json";
-import degree2Asset from "@/assets/baldness-degree-2.jpg.asset.json";
-import degree3Asset from "@/assets/baldness-degree-3.jpg.asset.json";
-import degree4Asset from "@/assets/baldness-degree-4.jpg.asset.json";
+import degree1Image from "@/assets/optimized/baldness-degree-1.webp";
+import degree2Image from "@/assets/optimized/baldness-degree-2.webp";
+import degree3Image from "@/assets/optimized/baldness-degree-3.webp";
+import degree4Image from "@/assets/optimized/baldness-degree-4.webp";
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
 import { QuizProgress } from "@/components/quiz/quiz-progress";
 import { Button } from "@/components/ui/button";
@@ -34,10 +34,10 @@ export const Route = createFileRoute("/calvicie")({
 });
 
 const baldnessDegrees = [
-  { degree: 1, image: degree1Asset.url },
-  { degree: 2, image: degree2Asset.url },
-  { degree: 3, image: degree3Asset.url },
-  { degree: 4, image: degree4Asset.url },
+  { degree: 1, image: degree1Image },
+  { degree: 2, image: degree2Image },
+  { degree: 3, image: degree3Image },
+  { degree: 4, image: degree4Image },
 ] as const;
 
 type BaldnessDegree = (typeof baldnessDegrees)[number]["degree"];
@@ -48,7 +48,7 @@ function BaldnessQuestion() {
   const navigate = useNavigate();
 
   return (
-    <div className="quiz-page-background relative flex min-h-screen flex-col overflow-hidden bg-background text-foreground">
+    <div className="quiz-page-background relative flex min-h-dvh flex-col bg-background text-foreground">
       <header className="relative border-b border-border/70">
         <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-5 sm:px-8 lg:px-12">
           <Button asChild variant="ghost" size="icon" className="size-10 rounded-full text-muted-foreground hover:bg-secondary hover:text-foreground">
@@ -105,6 +105,10 @@ function BaldnessQuestion() {
                     <img
                       src={image}
                       alt={`Exemplo visual do grau ${degree} de calvície`}
+                      width={760}
+                      height={1018}
+                      loading="eager"
+                      decoding="async"
                       className="size-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.025]"
                     />
                   </span>

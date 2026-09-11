@@ -145,6 +145,15 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     min-width: 320px;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
@@ -187,11 +196,14 @@
   .result-level-track {
     background: linear-gradient(
       90deg,
-      var(--chart-2) 0%,
-      var(--chart-4) 38%,
-      var(--chart-1) 68%,
+      var(--chart-4) 0%,
+      var(--chart-1) 58%,
       var(--destructive) 100%
     );
+  }
+
+  .safe-bottom {
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
   }
 }
 

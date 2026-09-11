@@ -3,7 +3,7 @@ import { ArrowLeft, Menu, ScanSearch } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
-import historyImage from "@/assets/noticia-historico-capilar.png.asset.json";
+import historyImage from "@/assets/optimized/noticia-historico-capilar.webp";
 import { QuizProgress } from "@/components/quiz/quiz-progress";
 import { Button } from "@/components/ui/button";
 
@@ -61,12 +61,13 @@ function HairDiagnosisTransition() {
 
   useEffect(() => {
     const startedAt = Date.now();
-    const progressDuration = 2600;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const progressDuration = reduceMotion ? 150 : 1600;
 
     const progressTimer = window.setInterval(() => {
       const elapsed = Date.now() - startedAt;
       setProgress(Math.min(100, Math.round((elapsed / progressDuration) * 100)));
-    }, 30);
+    }, 80);
 
     const transitionTimer = window.setTimeout(() => {
       setProgress(100);
@@ -75,7 +76,7 @@ function HairDiagnosisTransition() {
         search: { nome, grau, tempo, regiao: undefined },
         replace: true,
       });
-    }, 2800);
+    }, reduceMotion ? 180 : 1750);
 
     return () => {
       window.clearInterval(progressTimer);
@@ -84,7 +85,7 @@ function HairDiagnosisTransition() {
   }, [grau, navigate, nome, tempo]);
 
   return (
-    <div className="quiz-page-background flex min-h-screen flex-col bg-background text-foreground">
+     <div className="quiz-page-background flex min-h-dvh flex-col bg-background text-foreground">
       <header className="relative border-b border-border/70">
         <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-5 sm:px-8 lg:px-12">
           <Button asChild variant="ghost" size="icon" className="size-10 rounded-full text-muted-foreground hover:bg-secondary hover:text-foreground">
@@ -134,7 +135,7 @@ function HairDiagnosisTransition() {
           </div>
 
           <figure className="mx-auto aspect-square w-full max-w-[420px] overflow-hidden rounded-lg border border-border bg-card">
-            <img src={historyImage.url} alt="Informativo sobre a importância de observar há quanto tempo a queda de cabelo começou" className="h-full w-full object-contain" />
+            <img src={historyImage} alt="Informativo sobre a importância de observar há quanto tempo a queda de cabelo começou" width={840} height={840} decoding="async" className="h-full w-full object-contain" />
           </figure>
         </section>
       </main>

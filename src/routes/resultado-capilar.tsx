@@ -1,10 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AlertTriangle, ArrowRight, Clock3, Crosshair, Menu, ScanLine, Sparkles } from "lucide-react";
 
-import degree1Asset from "@/assets/baldness-degree-1.jpg.asset.json";
-import degree2Asset from "@/assets/baldness-degree-2.jpg.asset.json";
-import degree3Asset from "@/assets/baldness-degree-3.jpg.asset.json";
-import degree4Asset from "@/assets/baldness-degree-4.jpg.asset.json";
+import degree1Image from "@/assets/optimized/baldness-degree-1.webp";
+import degree2Image from "@/assets/optimized/baldness-degree-2.webp";
+import degree3Image from "@/assets/optimized/baldness-degree-3.webp";
+import degree4Image from "@/assets/optimized/baldness-degree-4.webp";
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
 import { QuizProgress } from "@/components/quiz/quiz-progress";
 import { Button } from "@/components/ui/button";
@@ -39,28 +39,28 @@ function parseOption<T extends string>(value: unknown, options: T[], fallback: T
 
 const degreeProfiles = {
   1: {
-    image: degree1Asset.url,
-    level: "Atenção inicial",
-    markerClass: "left-[18%]",
+    image: degree1Image,
+    level: "Atenção moderada",
+    markerClass: "left-[12%]",
     alert: "Sinais iniciais de afinamento",
     description: "Seu padrão indica um estágio inicial. Este é um bom momento para adotar uma rotina consistente e cuidar dos fios antes que a queda avance.",
   },
   2: {
-    image: degree2Asset.url,
+    image: degree2Image,
     level: "Atenção moderada",
-    markerClass: "left-[42%]",
+    markerClass: "left-[28%]",
     alert: "Progressão visível da calvície",
     description: "Seu padrão já apresenta áreas de menor densidade. Uma rotina direcionada e contínua é importante para cuidar do couro cabeludo e fortalecer os fios.",
   },
   3: {
-    image: degree3Asset.url,
+    image: degree3Image,
     level: "Atenção elevada",
-    markerClass: "left-[68%]",
+    markerClass: "left-[63%]",
     alert: "Afinamento em estágio avançado",
     description: "Seu padrão mostra perda de densidade mais acentuada. Começar agora uma rotina específica para seu perfil deve ser uma prioridade.",
   },
   4: {
-    image: degree4Asset.url,
+    image: degree4Image,
     level: "Atenção prioritária",
     markerClass: "left-[90%]",
     alert: "Padrão avançado de calvície",
@@ -175,7 +175,7 @@ function HairResult() {
                   <span className={`absolute top-[2.05rem] size-4 -translate-x-1/2 rounded-full border-[3px] border-foreground bg-card ${profile.markerClass}`} />
                 </div>
                 <div className="mt-3 grid grid-cols-4 text-[10px] text-muted-foreground sm:text-xs">
-                  <span>Inicial</span><span className="text-center">Moderada</span><span className="text-center">Elevada</span><span className="text-right">Prioritária</span>
+                   <span>Moderada</span><span className="text-center">Elevada</span><span className="text-right">Prioritária</span>
                 </div>
               </div>
 
@@ -201,7 +201,7 @@ function HairResult() {
             </div>
 
             <div className="relative min-h-[420px] overflow-hidden border-t border-border bg-secondary lg:min-h-0 lg:border-l lg:border-t-0">
-              <img src={profile.image} alt={`Referência visual selecionada para calvície grau ${search.grau}`} className="absolute inset-0 size-full object-cover object-top" />
+              <img src={profile.image} alt={`Referência visual selecionada para calvície grau ${search.grau}`} width={760} height={1018} decoding="async" className="absolute inset-0 size-full object-cover object-top" />
               <div className="absolute inset-0 bg-gradient-to-t from-card via-card/10 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-5 sm:p-8">
                 <div className="inline-flex rounded-md border border-primary/50 bg-card/90 px-3 py-1 text-xs font-semibold uppercase text-primary backdrop-blur-sm">Grau {search.grau}</div>
@@ -217,7 +217,7 @@ function HairResult() {
         </section>
       </main>
 
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-primary/30 bg-background/95 px-4 py-3 shadow-[0_-12px_32px_hsl(var(--background)/0.72)] backdrop-blur-xl sm:px-8 sm:py-4">
+      <div className="safe-bottom fixed inset-x-0 bottom-0 z-50 border-t border-primary/30 bg-background/95 px-4 pt-3 shadow-[0_-12px_32px_hsl(var(--background)/0.72)] backdrop-blur-xl sm:px-8 sm:pt-4">
         <Button asChild className="mx-auto flex h-14 w-full max-w-[520px] justify-between rounded-lg px-6 text-base font-semibold shadow-[0_0_28px_hsl(var(--primary)/0.32)] transition-transform hover:scale-[1.01] sm:h-16 sm:text-lg">
           <Link to="/recado-dr-stanley" search={search}>
             Quero iniciar meu cuidado

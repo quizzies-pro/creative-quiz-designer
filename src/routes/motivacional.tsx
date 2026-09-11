@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, Menu } from "lucide-react";
 
-import motivationalMenAsset from "@/assets/motivational-men.jpg.asset.json";
+import motivationalMenImage from "@/assets/optimized/motivational-men.webp";
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
 import { QuizProgress } from "@/components/quiz/quiz-progress";
 import { Button } from "@/components/ui/button";
@@ -72,7 +72,7 @@ function MotivationalPage() {
   const copy = motivationalCopy[grau];
 
   return (
-    <div className="quiz-page-background flex min-h-screen flex-col bg-background text-foreground">
+    <div className="quiz-page-background flex min-h-dvh flex-col bg-background text-foreground">
       <header className="relative border-b border-border/70">
         <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-5 sm:px-8 lg:px-12">
           <Button asChild variant="ghost" size="icon" className="size-10 rounded-full text-muted-foreground hover:bg-secondary hover:text-foreground">
@@ -113,10 +113,11 @@ function MotivationalPage() {
 
           <div className="relative aspect-[4/3] min-h-0 overflow-hidden rounded-2xl border border-border bg-card">
             <img
-              src={motivationalMenAsset.url}
+              src={motivationalMenImage}
               alt="Três homens em diferentes fases da vida que decidiram cuidar dos cabelos"
-              width={2400}
-              height={1792}
+              width={1200}
+              height={896}
+              decoding="async"
               className="size-full object-cover"
             />
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-background/60 to-transparent" />
