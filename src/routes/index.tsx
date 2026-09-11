@@ -6,6 +6,7 @@ import age1829Asset from "@/assets/age-18-29.jpg.asset.json";
 import age3039Asset from "@/assets/age-30-39.jpg.asset.json";
 import age4049Asset from "@/assets/age-40-49.jpg.asset.json";
 import age50PlusAsset from "@/assets/age-50-plus.jpg.asset.json";
+import { QuizProgress } from "@/components/quiz/quiz-progress";
 import { Button } from "@/components/ui/button";
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
 
@@ -44,7 +45,7 @@ function Index() {
 
   return (
     <div className="quiz-page-background relative flex min-h-screen flex-col overflow-hidden bg-background text-foreground">
-      <header className="border-b border-border/70">
+      <header className="relative border-b border-border/70">
         <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[minmax(0,1fr)_auto] items-center px-5 sm:px-8 lg:px-12">
           <a href="/" className="min-w-0" aria-label="Stanley’s Care — início">
             <img src={logoAsset.url} alt="Stanley’s Care" className="h-auto w-[190px] max-w-[58vw]" />
@@ -58,6 +59,7 @@ function Index() {
             <Menu className="size-5" />
           </Button>
         </div>
+        <QuizProgress currentStep={1} />
       </header>
 
       <main className="relative flex flex-1 items-start justify-center px-4 pb-10 pt-10 sm:px-8 sm:pb-28 sm:pt-16 lg:pt-14">

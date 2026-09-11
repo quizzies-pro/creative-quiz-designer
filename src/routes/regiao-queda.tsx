@@ -8,6 +8,7 @@ import hairlineTopAsset from "@/assets/regiao-entradas-topo.webp.asset.json";
 import topAsset from "@/assets/regiao-topo-da-cabeca.webp.asset.json";
 import multipleAreasAsset from "@/assets/regiao-varias-regioes.webp.asset.json";
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
+import { QuizProgress } from "@/components/quiz/quiz-progress";
 import { Button } from "@/components/ui/button";
 
 type BaldnessDegree = 1 | 2 | 3 | 4;
@@ -117,9 +118,7 @@ function HairLossAreaQuestion() {
             <Menu className="size-5" />
           </Button>
         </div>
-        <div className="absolute inset-x-0 -bottom-px h-1" aria-label="Etapa 6 do questionário">
-          <div className="h-full w-[88%] bg-primary" />
-        </div>
+        <QuizProgress currentStep={7} />
       </header>
 
       <main className="flex flex-1 items-start justify-center px-5 py-9 sm:px-8 sm:py-12">

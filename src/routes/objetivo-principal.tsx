@@ -2,6 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, ChartNoAxesColumnIncreasing, Check, Menu, RefreshCw, ScanLine, ShieldCheck, Sparkles } from "lucide-react";
 
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
+import { QuizProgress } from "@/components/quiz/quiz-progress";
 import { Button } from "@/components/ui/button";
 
 type BaldnessDegree = 1 | 2 | 3 | 4;
@@ -101,9 +102,7 @@ function MainGoalQuestion() {
             <Menu className="size-5" />
           </Button>
         </div>
-        <div className="absolute inset-x-0 -bottom-px h-1" aria-label="Etapa 12 do questionário">
-          <div className="h-full w-full bg-primary" />
-        </div>
+        <QuizProgress currentStep={13} />
       </header>
 
       <main className="flex flex-1 items-start justify-center px-5 py-9 sm:px-8 sm:py-12 lg:items-center lg:py-9">

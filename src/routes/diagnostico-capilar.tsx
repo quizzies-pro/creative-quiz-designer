@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import newsHistoryAsset from "@/assets/noticia-historico-capilar.png.asset.json";
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
+import { QuizProgress } from "@/components/quiz/quiz-progress";
 import { Button } from "@/components/ui/button";
 
 type BaldnessDegree = 1 | 2 | 3 | 4;
@@ -103,9 +104,7 @@ function HairDiagnosisTransition() {
             <Menu className="size-5" />
           </Button>
         </div>
-        <div className="absolute inset-x-0 -bottom-px h-1" aria-label="Análise do histórico em andamento">
-          <div className="h-full w-[82%] bg-primary" />
-        </div>
+        <QuizProgress currentStep={6} />
       </header>
 
       <main className="flex flex-1 items-center px-5 py-10 sm:px-8 sm:py-14 lg:py-12">

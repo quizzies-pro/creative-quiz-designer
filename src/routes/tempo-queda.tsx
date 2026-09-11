@@ -3,6 +3,7 @@ import { ArrowLeft, Check, HelpCircle, Menu } from "lucide-react";
 import { useState } from "react";
 
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
+import { QuizProgress } from "@/components/quiz/quiz-progress";
 import { Button } from "@/components/ui/button";
 
 type BaldnessDegree = 1 | 2 | 3 | 4;
@@ -84,9 +85,7 @@ function HairLossDurationQuestion() {
             <Menu className="size-5" />
           </Button>
         </div>
-        <div className="absolute inset-x-0 -bottom-px h-1" aria-label="Etapa 5 do questionário">
-          <div className="h-full w-[70%] bg-primary" />
-        </div>
+        <QuizProgress currentStep={5} />
       </header>
 
       <main className="flex flex-1 items-start justify-center px-5 py-10 sm:px-8 sm:py-14 lg:items-center lg:py-10">
