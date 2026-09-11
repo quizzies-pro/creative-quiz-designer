@@ -147,3 +147,15 @@
     min-width: 320px;
   }
 }
+
+@layer components {
+  .quiz-page-background {
+    background-image: radial-gradient(
+      ellipse 68% 58% at 50% 18%,
+      color-mix(in oklch, var(--primary-glow) 12%, transparent),
+      color-mix(in oklch, var(--primary-glow) 4%, transparent) 46%,
+      transparent 78%
+    );
+    background-repeat: no-repeat;
+  }
+}
