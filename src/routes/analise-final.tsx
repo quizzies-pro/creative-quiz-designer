@@ -1,5 +1,6 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, ChartNoAxesColumnIncreasing, Check, Menu, RefreshCw, ScanLine, ShieldCheck, Sparkles } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowLeft, Check, Menu, ScanSearch } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
 import { QuizProgress } from "@/components/quiz/quiz-progress";
@@ -24,12 +25,11 @@ const validFrequencies: CareFrequency[] = ["todos-dias", "algumas-vezes-semana",
 const validPeriods: PerceivedPeriod[] = ["dias", "meses", "um-ano", "mais-de-um-ano"];
 const validGoals: MainGoal[] = ["parar-queda", "recuperar-densidade", "fortalecer-fios", "melhorar-entradas-coroa", "rotina-completa"];
 
-const goalOptions = [
-  { value: "parar-queda" as const, label: "Parar a queda", icon: ShieldCheck },
-  { value: "recuperar-densidade" as const, label: "Recuperar densidade", icon: ChartNoAxesColumnIncreasing },
-  { value: "fortalecer-fios" as const, label: "Fortalecer os fios", icon: Sparkles },
-  { value: "melhorar-entradas-coroa" as const, label: "Melhorar entradas/coroa", icon: ScanLine },
-  { value: "rotina-completa" as const, label: "Ter uma rotina completa de cuidados", icon: RefreshCw },
+const analysisStages = [
+  "Analisando seu histórico de queda",
+  "Interpretando o padrão e a espessura dos fios",
+  "Avaliando couro cabeludo e rotina de cuidados",
+  "Preparando seu perfil capilar personalizado",
 ];
 
 function parseDegree(value: unknown): BaldnessDegree {
@@ -41,11 +41,7 @@ function parseOption<T extends string>(value: unknown, options: T[], fallback: T
   return typeof value === "string" && options.includes(value as T) ? (value as T) : fallback;
 }
 
-function parseGoal(value: unknown): MainGoal | undefined {
-  return typeof value === "string" && validGoals.includes(value as MainGoal) ? (value as MainGoal) : undefined;
-}
-
-export const Route = createFileRoute("/objetivo-principal")({
+export const Route = createFileRoute("/analise-final")({
   validateSearch: (search: Record<string, unknown>) => ({
     nome: typeof search["nome"] === "string" ? search["nome"].slice(0, 80).trim() : "",
     grau: parseDegree(search["grau"]),
@@ -56,42 +52,44 @@ export const Route = createFileRoute("/objetivo-principal")({
     tratamento: parseOption(search["tratamento"], validTreatments, "nunca"),
     frequencia: parseOption(search["frequencia"], validFrequencies, "sem-rotina"),
     periodo: parseOption(search["periodo"], validPeriods, "meses"),
-    objetivo: parseGoal(search["objetivo"]),
+    objetivo: parseOption(search["objetivo"], validGoals, "rotina-completa"),
   }),
   head: () => ({
     meta: [
-      { title: "Objetivo do cuidado capilar | Stanley’s Care" },
-      { name: "description", content: "Escolha o principal objetivo que você deseja alcançar com seus cuidados capilares." },
-      { property: "og:title", content: "Objetivo do cuidado capilar | Stanley’s Care" },
-      { property: "og:description", content: "Defina sua prioridade para personalizar sua avaliação capilar." },
+      { title: "Analisando seu perfil capilar | Stanley’s Care" },
+      { name: "description", content: "Estamos analisando suas respostas para preparar seu perfil capilar personalizado." },
+      { property: "og:title", content: "Analisando seu perfil capilar | Stanley’s Care" },
+      { property: "og:description", content: "Suas respostas estão sendo combinadas para construir sua análise capilar." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: MainGoalQuestion,
+  component: FinalAnalysis,
 });
 
-function MainGoalQuestion() {
-  const { nome, grau, tempo, regiao, espessura, couro, tratamento, frequencia, periodo, objetivo } = Route.useSearch();
-  const navigate = useNavigate();
+function FinalAnalysis() {
+  const search = Route.useSearch();
+  const [progress, setProgress] = useState(0);
+  const stageProgress = (index: number) => Math.min(100, Math.max(0, Math.round((progress - index * 25) * 4)));
+  const activeStage = Math.min(Math.floor(progress / 25), analysisStages.length - 1);
 
-  const selectGoal = (value: MainGoal) => {
-    void navigate({
-      to: "/analise-final",
-      search: { nome, grau, tempo, regiao, espessura, couro, tratamento, frequencia, periodo, objetivo: value },
-    });
-  };
+  useEffect(() => {
+    const startedAt = Date.now();
+    const duration = 4200;
+    const timer = window.setInterval(() => {
+      const nextProgress = Math.min(100, Math.round(((Date.now() - startedAt) / duration) * 100));
+      setProgress(nextProgress);
+      if (nextProgress === 100) window.clearInterval(timer);
+    }, 40);
+    return () => window.clearInterval(timer);
+  }, []);
 
   return (
     <div className="quiz-page-background flex min-h-screen flex-col bg-background text-foreground">
       <header className="relative border-b border-border/70">
         <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-5 sm:px-8 lg:px-12">
           <Button asChild variant="ghost" size="icon" className="size-10 rounded-full text-muted-foreground hover:bg-secondary hover:text-foreground">
-            <Link
-              to="/periodo-afinamento"
-              search={{ nome, grau, tempo, regiao, espessura, couro, tratamento, frequencia, periodo }}
-              aria-label="Voltar para a pergunta sobre o período do afinamento"
-            >
+            <Link to="/objetivo-principal" search={search} aria-label="Voltar para a pergunta sobre seu objetivo">
               <ArrowLeft className="size-5" />
             </Link>
           </Button>
@@ -102,41 +100,44 @@ function MainGoalQuestion() {
             <Menu className="size-5" />
           </Button>
         </div>
-        <QuizProgress currentStep={13} />
+        <QuizProgress currentStep={14} />
       </header>
 
-      <main className="flex flex-1 items-start justify-center px-5 py-9 sm:px-8 sm:py-12 lg:items-center lg:py-9">
-        <section className="w-full max-w-[720px]" aria-labelledby="goal-question">
+      <main className="flex flex-1 px-5 py-9 sm:px-8 sm:py-12">
+        <section className="mx-auto flex w-full max-w-[680px] flex-col" aria-labelledby="final-analysis-title">
           <div className="text-center">
-            <p className="text-xs font-semibold uppercase text-primary sm:text-sm">Seu objetivo</p>
-            <h1 id="goal-question" className="mx-auto mt-4 max-w-[680px] font-display text-[28px] font-normal leading-[1.2] sm:text-[34px]">
-              Qual é o seu principal objetivo hoje?
+            <p className="text-xs font-semibold uppercase text-primary sm:text-sm">Análise personalizada</p>
+            <h1 id="final-analysis-title" className="mt-3 font-display text-[30px] font-normal leading-[1.2] sm:text-[38px]">
+              {search.nome ? `${search.nome}, estamos analisando suas respostas` : "Estamos analisando suas respostas"}
             </h1>
+            <p className="mx-auto mt-4 max-w-[560px] text-sm leading-6 text-muted-foreground sm:text-base">
+              Estamos conectando cada detalhe para compreender seu momento capilar e suas prioridades.
+            </p>
           </div>
 
-          <div className="mt-8 grid gap-3 sm:mt-10">
-            {goalOptions.map((option) => {
-              const isSelected = objetivo === option.value;
-              const Icon = option.icon;
+          <div className="mt-9 space-y-6 sm:mt-11 sm:space-y-7" role="status" aria-live="polite" aria-label="Análise final do perfil capilar em andamento">
+            {analysisStages.map((stage, index) => {
+              const value = stageProgress(index);
+              const isActive = index === activeStage && progress < 100;
+              const isComplete = value === 100;
               return (
-                <Button
-                  key={option.value}
-                  type="button"
-                  variant="outline"
-                  aria-pressed={isSelected}
-                  onClick={() => selectGoal(option.value)}
-                  className="group grid h-auto min-h-[68px] w-full grid-cols-[40px_minmax(0,1fr)_auto] items-center gap-3 rounded-lg border-border bg-card px-4 py-3 text-left text-card-foreground shadow-none transition duration-200 hover:border-primary/70 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-secondary sm:min-h-[74px] sm:grid-cols-[44px_minmax(0,1fr)_auto] sm:gap-4 sm:px-5"
-                >
-                  <span className="grid size-9 place-items-center rounded-md bg-muted text-primary" aria-hidden="true">
-                    <Icon className="size-5" />
-                  </span>
-                  <span className="min-w-0 whitespace-normal text-sm font-semibold leading-5 sm:text-base">{option.label}</span>
-                  <span className="grid size-7 shrink-0 place-items-center rounded-full border border-muted-foreground/60 text-transparent transition group-aria-pressed:border-primary group-aria-pressed:bg-primary group-aria-pressed:text-primary-foreground sm:size-8">
-                    <Check className="size-4" aria-hidden="true" />
-                  </span>
-                </Button>
+                <div key={stage}>
+                  <div className="mb-2.5 flex min-h-6 items-center justify-between gap-4">
+                    <span className={isActive || isComplete ? "text-sm font-medium text-foreground sm:text-base" : "text-sm font-medium text-muted-foreground sm:text-base"}>{stage}</span>
+                    {isActive ? <span className="min-w-11 text-right text-sm font-semibold tabular-nums text-primary">{value}%</span> : isComplete ? <Check className="size-4 shrink-0 text-primary" aria-label="Concluído" /> : null}
+                  </div>
+                  <progress className="diagnosis-progress block h-2 w-full overflow-hidden rounded-full" value={value} max={100} aria-label={`${stage}: ${value}%`} />
+                </div>
               );
             })}
+          </div>
+
+          <div className="mx-auto mt-10 flex items-center gap-4 border-t border-border px-5 pt-7 text-left sm:mt-12 sm:px-8">
+            <span className="grid size-11 shrink-0 place-items-center rounded-full bg-secondary text-primary" aria-hidden="true"><ScanSearch className="size-5" /></span>
+            <div>
+              <p className="text-sm font-semibold text-foreground">Construindo seu perfil capilar</p>
+              <p className="mt-1 text-xs leading-5 text-muted-foreground">Suas respostas estão sendo organizadas em uma análise feita para o seu momento.</p>
+            </div>
           </div>
         </section>
       </main>
