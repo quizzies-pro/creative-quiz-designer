@@ -183,6 +183,16 @@
     box-shadow: 0 0 14px color-mix(in oklch, var(--primary) 45%, transparent);
     transition: width 80ms linear;
   }
+
+  .result-level-track {
+    background: linear-gradient(
+      90deg,
+      var(--chart-2) 0%,
+      var(--chart-4) 38%,
+      var(--chart-1) 68%,
+      var(--destructive) 100%
+    );
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
