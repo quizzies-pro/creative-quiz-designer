@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ArrowRight, CircleHelp, Menu } from "lucide-react";
 import { useState } from "react";
 
@@ -40,6 +40,7 @@ type AgeRange = (typeof ageRanges)[number]["label"];
 
 function Index() {
   const [selectedAge, setSelectedAge] = useState<AgeRange | null>(null);
+  const navigate = useNavigate();
 
   return (
     <div className="quiz-page-background relative flex min-h-screen flex-col overflow-hidden bg-background text-foreground">
@@ -80,7 +81,10 @@ function Index() {
                   type="button"
                   variant="outline"
                   aria-pressed={isSelected}
-                  onClick={() => setSelectedAge(label)}
+                  onClick={() => {
+                    setSelectedAge(label);
+                    void navigate({ to: "/nome" });
+                  }}
                   className="group relative aspect-[0.76] h-auto min-w-0 overflow-hidden rounded-2xl border-border bg-card p-0 text-left text-card-foreground shadow-none transition duration-300 hover:-translate-y-1 hover:border-primary/70 hover:bg-card focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-card"
                 >
                   <span className="absolute inset-0 overflow-hidden bg-secondary">
