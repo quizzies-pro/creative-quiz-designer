@@ -1,7 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, CircleHelp, Menu, UserRound } from "lucide-react";
+import { ArrowRight, CircleHelp, Menu } from "lucide-react";
 import { useState } from "react";
 
+import age1829Asset from "@/assets/age-18-29.jpg.asset.json";
+import age3039Asset from "@/assets/age-30-39.jpg.asset.json";
+import age4049Asset from "@/assets/age-40-49.jpg.asset.json";
+import age50PlusAsset from "@/assets/age-50-plus.jpg.asset.json";
 import { Button } from "@/components/ui/button";
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
 
@@ -25,10 +29,17 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const ageRanges = ["18–29", "30–39", "40–49", "50+"] as const;
+const ageRanges = [
+  { label: "18–29", image: age1829Asset.url },
+  { label: "30–39", image: age3039Asset.url },
+  { label: "40–49", image: age4049Asset.url },
+  { label: "50+", image: age50PlusAsset.url },
+] as const;
+
+type AgeRange = (typeof ageRanges)[number]["label"];
 
 function Index() {
-  const [selectedAge, setSelectedAge] = useState<(typeof ageRanges)[number] | null>(null);
+  const [selectedAge, setSelectedAge] = useState<AgeRange | null>(null);
 
   return (
     <div className="quiz-page-background relative flex min-h-screen flex-col overflow-hidden bg-background text-foreground">
@@ -61,24 +72,26 @@ function Index() {
           </div>
 
           <div className="mt-7 grid grid-cols-2 gap-3 sm:mt-8 sm:gap-5 lg:grid-cols-4">
-            {ageRanges.map((age) => {
-              const isSelected = selectedAge === age;
+            {ageRanges.map(({ label, image }) => {
+              const isSelected = selectedAge === label;
               return (
                 <Button
-                  key={age}
+                  key={label}
                   type="button"
                   variant="outline"
                   aria-pressed={isSelected}
-                  onClick={() => setSelectedAge(age)}
+                  onClick={() => setSelectedAge(label)}
                   className="group h-auto min-w-0 flex-col gap-0 overflow-hidden rounded-xl border-border bg-card p-0 text-left text-card-foreground shadow-none transition duration-300 hover:-translate-y-1 hover:border-primary/70 hover:bg-card focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-card"
                 >
                   <span className="relative flex aspect-[1.2] w-full items-center justify-center overflow-hidden bg-secondary sm:aspect-[.94]">
-                    <span className="absolute inset-0 bg-[radial-gradient(circle_at_50%_65%,var(--primary-glow),transparent_56%)] opacity-25 transition-opacity group-hover:opacity-40" />
-                    <UserRound aria-hidden="true" className="size-20 text-muted-foreground/45 sm:size-24" strokeWidth={1} />
-                    <span className="absolute bottom-3 text-[10px] font-medium uppercase text-muted-foreground">Foto em breve</span>
+                    <img
+                      src={image}
+                      alt={`Homem representando a faixa etária de ${label} anos`}
+                      className="size-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.025]"
+                    />
                   </span>
                   <span className="m-1.5 grid w-[calc(100%-0.75rem)] grid-cols-[minmax(0,1fr)_auto] items-center gap-2 rounded-lg bg-foreground px-3 py-2.5 text-background sm:m-2 sm:w-[calc(100%-1rem)] sm:px-4">
-                    <span className="min-w-0 truncate text-sm font-bold sm:text-base">Idade: {age}</span>
+                    <span className="min-w-0 truncate text-sm font-bold sm:text-base">Idade: {label}</span>
                     <span className="grid size-7 shrink-0 place-items-center rounded-full bg-background text-foreground transition-transform group-hover:translate-x-0.5">
                       <ArrowRight className="size-4" />
                     </span>
