@@ -17,6 +17,7 @@ import { Route as EspessuraFiosRouteImport } from './routes/espessura-fios'
 import { Route as FrequenciaCuidadosRouteImport } from './routes/frequencia-cuidados'
 import { Route as MotivacionalRouteImport } from './routes/motivacional'
 import { Route as NomeRouteImport } from './routes/nome'
+import { Route as ObjetivoPrincipalRouteImport } from './routes/objetivo-principal'
 import { Route as PeriodoAfinamentoRouteImport } from './routes/periodo-afinamento'
 import { Route as RegiaoQuedaRouteImport } from './routes/regiao-queda'
 import { Route as TempoQuedaRouteImport } from './routes/tempo-queda'
@@ -62,6 +63,11 @@ const NomeRoute = NomeRouteImport.update({
   path: '/nome',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ObjetivoPrincipalRoute = ObjetivoPrincipalRouteImport.update({
+  id: '/objetivo-principal',
+  path: '/objetivo-principal',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PeriodoAfinamentoRoute = PeriodoAfinamentoRouteImport.update({
   id: '/periodo-afinamento',
   path: '/periodo-afinamento',
@@ -92,6 +98,7 @@ export interface FileRoutesByFullPath {
   '/frequencia-cuidados': typeof FrequenciaCuidadosRoute
   '/motivacional': typeof MotivacionalRoute
   '/nome': typeof NomeRoute
+  '/objetivo-principal': typeof ObjetivoPrincipalRoute
   '/periodo-afinamento': typeof PeriodoAfinamentoRoute
   '/regiao-queda': typeof RegiaoQuedaRoute
   '/tempo-queda': typeof TempoQuedaRoute
@@ -106,6 +113,7 @@ export interface FileRoutesByTo {
   '/frequencia-cuidados': typeof FrequenciaCuidadosRoute
   '/motivacional': typeof MotivacionalRoute
   '/nome': typeof NomeRoute
+  '/objetivo-principal': typeof ObjetivoPrincipalRoute
   '/periodo-afinamento': typeof PeriodoAfinamentoRoute
   '/regiao-queda': typeof RegiaoQuedaRoute
   '/tempo-queda': typeof TempoQuedaRoute
@@ -121,6 +129,7 @@ export interface FileRoutesById {
   '/frequencia-cuidados': typeof FrequenciaCuidadosRoute
   '/motivacional': typeof MotivacionalRoute
   '/nome': typeof NomeRoute
+  '/objetivo-principal': typeof ObjetivoPrincipalRoute
   '/periodo-afinamento': typeof PeriodoAfinamentoRoute
   '/regiao-queda': typeof RegiaoQuedaRoute
   '/tempo-queda': typeof TempoQuedaRoute
@@ -137,6 +146,7 @@ export interface FileRouteTypes {
     | '/frequencia-cuidados'
     | '/motivacional'
     | '/nome'
+    | '/objetivo-principal'
     | '/periodo-afinamento'
     | '/regiao-queda'
     | '/tempo-queda'
@@ -151,6 +161,7 @@ export interface FileRouteTypes {
     | '/frequencia-cuidados'
     | '/motivacional'
     | '/nome'
+    | '/objetivo-principal'
     | '/periodo-afinamento'
     | '/regiao-queda'
     | '/tempo-queda'
@@ -165,6 +176,7 @@ export interface FileRouteTypes {
     | '/frequencia-cuidados'
     | '/motivacional'
     | '/nome'
+    | '/objetivo-principal'
     | '/periodo-afinamento'
     | '/regiao-queda'
     | '/tempo-queda'
@@ -180,6 +192,7 @@ export interface RootRouteChildren {
   FrequenciaCuidadosRoute: typeof FrequenciaCuidadosRoute
   MotivacionalRoute: typeof MotivacionalRoute
   NomeRoute: typeof NomeRoute
+  ObjetivoPrincipalRoute: typeof ObjetivoPrincipalRoute
   PeriodoAfinamentoRoute: typeof PeriodoAfinamentoRoute
   RegiaoQuedaRoute: typeof RegiaoQuedaRoute
   TempoQuedaRoute: typeof TempoQuedaRoute
@@ -244,6 +257,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NomeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/objetivo-principal': {
+      id: '/objetivo-principal'
+      path: '/objetivo-principal'
+      fullPath: '/objetivo-principal'
+      preLoaderRoute: typeof ObjetivoPrincipalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/periodo-afinamento': {
       id: '/periodo-afinamento'
       path: '/periodo-afinamento'
@@ -284,6 +304,7 @@ const rootRouteChildren: RootRouteChildren = {
   FrequenciaCuidadosRoute: FrequenciaCuidadosRoute,
   MotivacionalRoute: MotivacionalRoute,
   NomeRoute: NomeRoute,
+  ObjetivoPrincipalRoute: ObjetivoPrincipalRoute,
   PeriodoAfinamentoRoute: PeriodoAfinamentoRoute,
   RegiaoQuedaRoute: RegiaoQuedaRoute,
   TempoQuedaRoute: TempoQuedaRoute,
