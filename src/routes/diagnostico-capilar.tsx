@@ -61,7 +61,7 @@ function HairDiagnosisTransition() {
     const transitionTimer = window.setTimeout(() => {
       void navigate({
         to: "/regiao-queda",
-        search: { nome, grau, tempo },
+        search: { nome, grau, tempo, regiao: undefined },
         replace: true,
       });
     }, 4000);
