@@ -21,6 +21,7 @@ import { Route as MotivacionalRouteImport } from './routes/motivacional'
 import { Route as NomeRouteImport } from './routes/nome'
 import { Route as ObjetivoPrincipalRouteImport } from './routes/objetivo-principal'
 import { Route as PeriodoAfinamentoRouteImport } from './routes/periodo-afinamento'
+import { Route as RecadoDrStanleyRouteImport } from './routes/recado-dr-stanley'
 import { Route as RegiaoQuedaRouteImport } from './routes/regiao-queda'
 import { Route as ResultadoCapilarRouteImport } from './routes/resultado-capilar'
 import { Route as TempoQuedaRouteImport } from './routes/tempo-queda'
@@ -86,6 +87,11 @@ const PeriodoAfinamentoRoute = PeriodoAfinamentoRouteImport.update({
   path: '/periodo-afinamento',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RecadoDrStanleyRoute = RecadoDrStanleyRouteImport.update({
+  id: '/recado-dr-stanley',
+  path: '/recado-dr-stanley',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RegiaoQuedaRoute = RegiaoQuedaRouteImport.update({
   id: '/regiao-queda',
   path: '/regiao-queda',
@@ -120,6 +126,7 @@ export interface FileRoutesByFullPath {
   '/nome': typeof NomeRoute
   '/objetivo-principal': typeof ObjetivoPrincipalRoute
   '/periodo-afinamento': typeof PeriodoAfinamentoRoute
+  '/recado-dr-stanley': typeof RecadoDrStanleyRoute
   '/regiao-queda': typeof RegiaoQuedaRoute
   '/resultado-capilar': typeof ResultadoCapilarRoute
   '/tempo-queda': typeof TempoQuedaRoute
@@ -138,6 +145,7 @@ export interface FileRoutesByTo {
   '/nome': typeof NomeRoute
   '/objetivo-principal': typeof ObjetivoPrincipalRoute
   '/periodo-afinamento': typeof PeriodoAfinamentoRoute
+  '/recado-dr-stanley': typeof RecadoDrStanleyRoute
   '/regiao-queda': typeof RegiaoQuedaRoute
   '/resultado-capilar': typeof ResultadoCapilarRoute
   '/tempo-queda': typeof TempoQuedaRoute
@@ -157,6 +165,7 @@ export interface FileRoutesById {
   '/nome': typeof NomeRoute
   '/objetivo-principal': typeof ObjetivoPrincipalRoute
   '/periodo-afinamento': typeof PeriodoAfinamentoRoute
+  '/recado-dr-stanley': typeof RecadoDrStanleyRoute
   '/regiao-queda': typeof RegiaoQuedaRoute
   '/resultado-capilar': typeof ResultadoCapilarRoute
   '/tempo-queda': typeof TempoQuedaRoute
@@ -177,6 +186,7 @@ export interface FileRouteTypes {
     | '/nome'
     | '/objetivo-principal'
     | '/periodo-afinamento'
+    | '/recado-dr-stanley'
     | '/regiao-queda'
     | '/resultado-capilar'
     | '/tempo-queda'
@@ -195,6 +205,7 @@ export interface FileRouteTypes {
     | '/nome'
     | '/objetivo-principal'
     | '/periodo-afinamento'
+    | '/recado-dr-stanley'
     | '/regiao-queda'
     | '/resultado-capilar'
     | '/tempo-queda'
@@ -213,6 +224,7 @@ export interface FileRouteTypes {
     | '/nome'
     | '/objetivo-principal'
     | '/periodo-afinamento'
+    | '/recado-dr-stanley'
     | '/regiao-queda'
     | '/resultado-capilar'
     | '/tempo-queda'
@@ -232,6 +244,7 @@ export interface RootRouteChildren {
   NomeRoute: typeof NomeRoute
   ObjetivoPrincipalRoute: typeof ObjetivoPrincipalRoute
   PeriodoAfinamentoRoute: typeof PeriodoAfinamentoRoute
+  RecadoDrStanleyRoute: typeof RecadoDrStanleyRoute
   RegiaoQuedaRoute: typeof RegiaoQuedaRoute
   ResultadoCapilarRoute: typeof ResultadoCapilarRoute
   TempoQuedaRoute: typeof TempoQuedaRoute
@@ -324,6 +337,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PeriodoAfinamentoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/recado-dr-stanley': {
+      id: '/recado-dr-stanley'
+      path: '/recado-dr-stanley'
+      fullPath: '/recado-dr-stanley'
+      preLoaderRoute: typeof RecadoDrStanleyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/regiao-queda': {
       id: '/regiao-queda'
       path: '/regiao-queda'
@@ -368,6 +388,7 @@ const rootRouteChildren: RootRouteChildren = {
   NomeRoute: NomeRoute,
   ObjetivoPrincipalRoute: ObjetivoPrincipalRoute,
   PeriodoAfinamentoRoute: PeriodoAfinamentoRoute,
+  RecadoDrStanleyRoute: RecadoDrStanleyRoute,
   RegiaoQuedaRoute: RegiaoQuedaRoute,
   ResultadoCapilarRoute: ResultadoCapilarRoute,
   TempoQuedaRoute: TempoQuedaRoute,

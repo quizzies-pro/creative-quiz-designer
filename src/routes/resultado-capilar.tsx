@@ -218,9 +218,11 @@ function HairResult() {
       </main>
 
       <div className="fixed inset-x-0 bottom-0 z-50 border-t border-primary/30 bg-background/95 px-4 py-3 shadow-[0_-12px_32px_hsl(var(--background)/0.72)] backdrop-blur-xl sm:px-8 sm:py-4">
-        <Button className="mx-auto flex h-14 w-full max-w-[520px] justify-between rounded-lg px-6 text-base font-semibold shadow-[0_0_28px_hsl(var(--primary)/0.32)] transition-transform hover:scale-[1.01] sm:h-16 sm:text-lg">
-          Quero iniciar meu cuidado
-          <ArrowRight className="size-5" />
+        <Button asChild className="mx-auto flex h-14 w-full max-w-[520px] justify-between rounded-lg px-6 text-base font-semibold shadow-[0_0_28px_hsl(var(--primary)/0.32)] transition-transform hover:scale-[1.01] sm:h-16 sm:text-lg">
+          <Link to="/recado-dr-stanley" search={search}>
+            Quero iniciar meu cuidado
+            <ArrowRight className="size-5" />
+          </Link>
         </Button>
       </div>
     </div>
