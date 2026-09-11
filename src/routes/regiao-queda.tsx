@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, Check, Menu } from "lucide-react";
 import { useState } from "react";
 
@@ -34,6 +34,8 @@ const areaOptions: Array<{
   { value: "varias-regioes", label: "Em várias regiões da cabeça", image: multipleAreasAsset.url },
 ];
 
+const validAreas: HairLossArea[] = ["entradas", "topo", "coroa", "entradas-topo", "varias-regioes"];
+
 function parseDegree(value: unknown): BaldnessDegree {
   const degree = Number(value);
   return degree === 1 || degree === 2 || degree === 3 || degree === 4 ? degree : 1;
@@ -45,11 +47,18 @@ function parseDuration(value: unknown): HairLossDuration {
     : "incerto";
 }
 
+function parseArea(value: unknown): HairLossArea | undefined {
+  return typeof value === "string" && validAreas.includes(value as HairLossArea)
+    ? (value as HairLossArea)
+    : undefined;
+}
+
 export const Route = createFileRoute("/regiao-queda")({
   validateSearch: (search: Record<string, unknown>) => ({
     nome: typeof search["nome"] === "string" ? search["nome"].slice(0, 80).trim() : "",
     grau: parseDegree(search["grau"]),
     tempo: parseDuration(search["tempo"]),
+    regiao: parseArea(search["regiao"]),
   }),
   head: () => ({
     meta: [
@@ -71,8 +80,17 @@ export const Route = createFileRoute("/regiao-queda")({
 });
 
 function HairLossAreaQuestion() {
-  const { nome, grau, tempo } = Route.useSearch();
-  const [selectedArea, setSelectedArea] = useState<HairLossArea | null>(null);
+  const { nome, grau, tempo, regiao } = Route.useSearch();
+  const navigate = useNavigate();
+  const [selectedArea, setSelectedArea] = useState<HairLossArea | null>(regiao ?? null);
+
+  const selectArea = (area: HairLossArea) => {
+    setSelectedArea(area);
+    void navigate({
+      to: "/espessura-fios",
+      search: { nome, grau, tempo, regiao: area, espessura: undefined },
+    });
+  };
 
   return (
     <div className="quiz-page-background flex min-h-screen flex-col bg-background text-foreground">
@@ -126,7 +144,7 @@ function HairLossAreaQuestion() {
                   type="button"
                   variant="outline"
                   aria-pressed={isSelected}
-                  onClick={() => setSelectedArea(option.value)}
+                  onClick={() => selectArea(option.value)}
                   className="group grid h-auto min-h-[92px] w-full grid-cols-[76px_minmax(0,1fr)_auto] items-center gap-4 overflow-hidden rounded-lg border-border bg-card p-2 pr-4 text-left text-card-foreground shadow-none transition duration-200 hover:border-primary/70 hover:bg-secondary focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-secondary sm:min-h-[108px] sm:grid-cols-[92px_minmax(0,1fr)_auto] sm:gap-5 sm:p-2.5 sm:pr-5"
                 >
                   <span className="aspect-square size-[76px] overflow-hidden rounded-md bg-muted sm:size-[88px]">
