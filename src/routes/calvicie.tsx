@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, CircleHelp, Menu } from "lucide-react";
 import { useState } from "react";
 
@@ -44,6 +44,7 @@ type BaldnessDegree = (typeof baldnessDegrees)[number]["degree"];
 function BaldnessQuestion() {
   const [selectedDegree, setSelectedDegree] = useState<BaldnessDegree | null>(null);
   const { nome } = Route.useSearch();
+  const navigate = useNavigate();
 
   return (
     <div className="quiz-page-background relative flex min-h-screen flex-col overflow-hidden bg-background text-foreground">
@@ -92,7 +93,13 @@ function BaldnessQuestion() {
                   type="button"
                   variant="outline"
                   aria-pressed={isSelected}
-                  onClick={() => setSelectedDegree(degree)}
+                  onClick={() => {
+                    setSelectedDegree(degree);
+                    void navigate({
+                      to: "/motivacional",
+                      search: { nome, grau: degree },
+                    });
+                  }}
                   className="group relative aspect-[0.76] h-auto min-w-0 overflow-hidden rounded-2xl border-border bg-card p-0 text-left text-card-foreground shadow-none transition duration-300 hover:-translate-y-1 hover:border-primary/70 hover:bg-card focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-card"
                 >
                   <span className="absolute inset-0 overflow-hidden bg-secondary">

@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CalvicieRouteImport } from './routes/calvicie'
+import { Route as MotivacionalRouteImport } from './routes/motivacional'
 import { Route as NomeRouteImport } from './routes/nome'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const CalvicieRoute = CalvicieRouteImport.update({
   path: '/calvicie',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MotivacionalRoute = MotivacionalRouteImport.update({
+  id: '/motivacional',
+  path: '/motivacional',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NomeRoute = NomeRouteImport.update({
   id: '/nome',
   path: '/nome',
@@ -32,30 +38,34 @@ const NomeRoute = NomeRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/calvicie': typeof CalvicieRoute
+  '/motivacional': typeof MotivacionalRoute
   '/nome': typeof NomeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/calvicie': typeof CalvicieRoute
+  '/motivacional': typeof MotivacionalRoute
   '/nome': typeof NomeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/calvicie': typeof CalvicieRoute
+  '/motivacional': typeof MotivacionalRoute
   '/nome': typeof NomeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/calvicie' | '/nome'
+  fullPaths: '/' | '/calvicie' | '/motivacional' | '/nome'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/calvicie' | '/nome'
-  id: '__root__' | '/' | '/calvicie' | '/nome'
+  to: '/' | '/calvicie' | '/motivacional' | '/nome'
+  id: '__root__' | '/' | '/calvicie' | '/motivacional' | '/nome'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CalvicieRoute: typeof CalvicieRoute
+  MotivacionalRoute: typeof MotivacionalRoute
   NomeRoute: typeof NomeRoute
 }
 
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CalvicieRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/motivacional': {
+      id: '/motivacional'
+      path: '/motivacional'
+      fullPath: '/motivacional'
+      preLoaderRoute: typeof MotivacionalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/nome': {
       id: '/nome'
       path: '/nome'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CalvicieRoute: CalvicieRoute,
+  MotivacionalRoute: MotivacionalRoute,
   NomeRoute: NomeRoute,
 }
 export const routeTree = rootRouteImport
