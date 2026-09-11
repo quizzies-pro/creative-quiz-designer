@@ -41,7 +41,7 @@ function NameQuestion() {
       <header className="relative border-b border-border/70">
         <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-5 sm:px-8 lg:px-12">
           <Button asChild variant="ghost" size="icon" className="size-10 rounded-full text-muted-foreground hover:bg-secondary hover:text-foreground">
-            <Link to="/" aria-label="Voltar para escolha de idade">
+            <Link to="/idade" aria-label="Voltar para escolha de idade">
               <ArrowLeft className="size-5" />
             </Link>
           </Button>

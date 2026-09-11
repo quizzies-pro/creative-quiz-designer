@@ -16,6 +16,7 @@ import { Route as CouroCabeludoRouteImport } from './routes/couro-cabeludo'
 import { Route as DiagnosticoCapilarRouteImport } from './routes/diagnostico-capilar'
 import { Route as EspessuraFiosRouteImport } from './routes/espessura-fios'
 import { Route as FrequenciaCuidadosRouteImport } from './routes/frequencia-cuidados'
+import { Route as IdadeRouteImport } from './routes/idade'
 import { Route as MotivacionalRouteImport } from './routes/motivacional'
 import { Route as NomeRouteImport } from './routes/nome'
 import { Route as ObjetivoPrincipalRouteImport } from './routes/objetivo-principal'
@@ -58,6 +59,11 @@ const EspessuraFiosRoute = EspessuraFiosRouteImport.update({
 const FrequenciaCuidadosRoute = FrequenciaCuidadosRouteImport.update({
   id: '/frequencia-cuidados',
   path: '/frequencia-cuidados',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IdadeRoute = IdadeRouteImport.update({
+  id: '/idade',
+  path: '/idade',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MotivacionalRoute = MotivacionalRouteImport.update({
@@ -109,6 +115,7 @@ export interface FileRoutesByFullPath {
   '/diagnostico-capilar': typeof DiagnosticoCapilarRoute
   '/espessura-fios': typeof EspessuraFiosRoute
   '/frequencia-cuidados': typeof FrequenciaCuidadosRoute
+  '/idade': typeof IdadeRoute
   '/motivacional': typeof MotivacionalRoute
   '/nome': typeof NomeRoute
   '/objetivo-principal': typeof ObjetivoPrincipalRoute
@@ -126,6 +133,7 @@ export interface FileRoutesByTo {
   '/diagnostico-capilar': typeof DiagnosticoCapilarRoute
   '/espessura-fios': typeof EspessuraFiosRoute
   '/frequencia-cuidados': typeof FrequenciaCuidadosRoute
+  '/idade': typeof IdadeRoute
   '/motivacional': typeof MotivacionalRoute
   '/nome': typeof NomeRoute
   '/objetivo-principal': typeof ObjetivoPrincipalRoute
@@ -144,6 +152,7 @@ export interface FileRoutesById {
   '/diagnostico-capilar': typeof DiagnosticoCapilarRoute
   '/espessura-fios': typeof EspessuraFiosRoute
   '/frequencia-cuidados': typeof FrequenciaCuidadosRoute
+  '/idade': typeof IdadeRoute
   '/motivacional': typeof MotivacionalRoute
   '/nome': typeof NomeRoute
   '/objetivo-principal': typeof ObjetivoPrincipalRoute
@@ -163,6 +172,7 @@ export interface FileRouteTypes {
     | '/diagnostico-capilar'
     | '/espessura-fios'
     | '/frequencia-cuidados'
+    | '/idade'
     | '/motivacional'
     | '/nome'
     | '/objetivo-principal'
@@ -180,6 +190,7 @@ export interface FileRouteTypes {
     | '/diagnostico-capilar'
     | '/espessura-fios'
     | '/frequencia-cuidados'
+    | '/idade'
     | '/motivacional'
     | '/nome'
     | '/objetivo-principal'
@@ -197,6 +208,7 @@ export interface FileRouteTypes {
     | '/diagnostico-capilar'
     | '/espessura-fios'
     | '/frequencia-cuidados'
+    | '/idade'
     | '/motivacional'
     | '/nome'
     | '/objetivo-principal'
@@ -215,6 +227,7 @@ export interface RootRouteChildren {
   DiagnosticoCapilarRoute: typeof DiagnosticoCapilarRoute
   EspessuraFiosRoute: typeof EspessuraFiosRoute
   FrequenciaCuidadosRoute: typeof FrequenciaCuidadosRoute
+  IdadeRoute: typeof IdadeRoute
   MotivacionalRoute: typeof MotivacionalRoute
   NomeRoute: typeof NomeRoute
   ObjetivoPrincipalRoute: typeof ObjetivoPrincipalRoute
@@ -274,6 +287,13 @@ declare module '@tanstack/react-router' {
       path: '/frequencia-cuidados'
       fullPath: '/frequencia-cuidados'
       preLoaderRoute: typeof FrequenciaCuidadosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/idade': {
+      id: '/idade'
+      path: '/idade'
+      fullPath: '/idade'
+      preLoaderRoute: typeof IdadeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/motivacional': {
@@ -343,6 +363,7 @@ const rootRouteChildren: RootRouteChildren = {
   DiagnosticoCapilarRoute: DiagnosticoCapilarRoute,
   EspessuraFiosRoute: EspessuraFiosRoute,
   FrequenciaCuidadosRoute: FrequenciaCuidadosRoute,
+  IdadeRoute: IdadeRoute,
   MotivacionalRoute: MotivacionalRoute,
   NomeRoute: NomeRoute,
   ObjetivoPrincipalRoute: ObjetivoPrincipalRoute,
