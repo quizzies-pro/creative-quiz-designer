@@ -26,7 +26,7 @@ export const Route = createFileRoute("/")({
 
 function VideoOpening() {
   return (
-    <div className="quiz-page-background flex min-h-screen flex-col bg-background text-foreground">
+    <div className="quiz-page-background flex min-h-dvh flex-col bg-background text-foreground">
       <header className="relative border-b border-border/70">
         <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[minmax(0,1fr)_auto] items-center px-5 sm:px-8 lg:px-12">
           <Link to="/" className="min-w-0" aria-label="Stanley’s Care — início">

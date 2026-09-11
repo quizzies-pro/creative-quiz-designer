@@ -174,7 +174,7 @@ function HairResult() {
                   <div className="result-level-track h-2 rounded-full" />
                   <span className={`absolute top-[2.05rem] size-4 -translate-x-1/2 rounded-full border-[3px] border-foreground bg-card ${profile.markerClass}`} />
                 </div>
-                <div className="mt-3 grid grid-cols-4 text-[10px] text-muted-foreground sm:text-xs">
+                 <div className="mt-3 grid grid-cols-3 text-[10px] text-muted-foreground sm:text-xs">
                    <span>Moderada</span><span className="text-center">Elevada</span><span className="text-right">Prioritária</span>
                 </div>
               </div>
