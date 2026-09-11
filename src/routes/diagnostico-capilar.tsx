@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Check, LoaderCircle, Menu, ScanSearch } from "lucide-react";
+import { ArrowLeft, Check, Menu, ScanSearch, ShieldCheck } from "lucide-react";
 
 import newsHistoryAsset from "@/assets/noticia-historico-capilar.png.asset.json";
 import logoAsset from "@/assets/stanleys-care-logo.webp.asset.json";
@@ -110,7 +110,7 @@ function HairDiagnosisTransition() {
           </div>
 
           <div className="relative mx-auto w-full max-w-[430px] overflow-hidden rounded-xl border border-border bg-card" aria-label="Análise do perfil capilar em andamento">
-            <div className="relative aspect-square overflow-hidden bg-muted">
+            <div className="relative aspect-video overflow-hidden bg-muted">
               <img
                 src={newsHistoryAsset.url}
                 alt="Notícia sobre a importância do histórico da queda e do afinamento dos cabelos"
@@ -118,28 +118,37 @@ function HairDiagnosisTransition() {
                 height={768}
                 className="size-full object-cover"
               />
-              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-card to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-card to-transparent" />
+              <span className="absolute bottom-4 left-5 rounded-full border border-primary/30 bg-background/85 px-3 py-1 text-xs font-semibold text-primary backdrop-blur-sm">
+                Análise em processamento
+              </span>
             </div>
 
-            <div className="p-6 sm:p-7">
-              <div className="flex items-center justify-between border-b border-border pb-5">
+            <div className="flex flex-col items-center px-6 pb-7 pt-5 text-center sm:px-8 sm:pb-8">
               <div>
-                <p className="text-xs font-semibold uppercase text-muted-foreground">Perfil capilar</p>
-                <p className="mt-1 font-display text-lg font-medium">Análise em andamento</p>
-              </div>
-              <span className="grid size-11 place-items-center rounded-full bg-secondary text-primary">
-                <LoaderCircle className="size-5 animate-spin motion-reduce:animate-none" />
-              </span>
+                <p className="font-display text-xl font-semibold text-foreground">Processando seu perfil</p>
+                <p className="mx-auto mt-2 max-w-[330px] text-sm leading-6 text-muted-foreground">
+                  Estamos avaliando suas respostas para identificar os principais sinais do seu histórico capilar.
+                </p>
               </div>
 
-              <div className="mt-5" role="status" aria-live="polite">
-                <div className="h-1.5 overflow-hidden rounded-full bg-secondary">
-                  <div className="h-full w-2/3 animate-pulse rounded-full bg-primary motion-reduce:animate-none" />
+              <div className="mt-7 w-full" role="status" aria-live="polite">
+                <div className="relative h-2 w-full overflow-hidden rounded-full bg-secondary">
+                  <div className="diagnosis-loading-bar absolute inset-y-0 left-0 w-1/2 rounded-full bg-primary" />
                 </div>
-                <div className="mt-3 flex items-center justify-between gap-4 text-xs text-muted-foreground">
-                  <span>Cruzando suas respostas</span>
-                  <span className="shrink-0 font-semibold text-primary">Analisando...</span>
+                <div className="mt-4 flex items-center justify-center gap-3 text-primary">
+                  <span className="flex gap-1" aria-hidden="true">
+                    <span className="size-1.5 animate-bounce rounded-full bg-primary [animation-delay:-300ms] motion-reduce:animate-none" />
+                    <span className="size-1.5 animate-bounce rounded-full bg-primary [animation-delay:-150ms] motion-reduce:animate-none" />
+                    <span className="size-1.5 animate-bounce rounded-full bg-primary motion-reduce:animate-none" />
+                  </span>
+                  <span className="text-xs font-bold uppercase">Cruzando suas respostas</span>
                 </div>
+              </div>
+
+              <div className="mt-7 flex items-center gap-2 border-t border-border pt-5 text-muted-foreground">
+                <ShieldCheck className="size-4" aria-hidden="true" />
+                <span className="text-xs font-medium uppercase">Análise segura do seu histórico</span>
               </div>
             </div>
           </div>
