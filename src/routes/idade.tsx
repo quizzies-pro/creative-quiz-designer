@@ -66,8 +66,8 @@ function AgeQuestion() {
         <section className="relative w-full max-w-[930px]" aria-labelledby="page-title">
           <div className="text-center">
             <p className="mb-3 text-xs font-semibold uppercase text-primary sm:text-sm">Seu plano personalizado</p>
-            <h1 id="page-title" className="font-display text-3xl font-bold uppercase sm:text-4xl lg:text-[42px]">
-              PRECISAMOS COLHER ALGUMAS INFORMAÇÕES PARA RECOMENDARMOS O MELHOR TRATAMENTO PARA O SEU CASO.
+            <h1 id="page-title" className="mx-auto max-w-[760px] font-display text-[28px] font-normal leading-tight sm:text-[34px] lg:text-[38px]">
+              Cada fase da vida pede um cuidado diferente. Vamos encontrar o ideal para você.
             </h1>
             <p className="mt-5 text-base font-semibold uppercase text-muted-foreground sm:text-lg">
               Escolha a sua idade
