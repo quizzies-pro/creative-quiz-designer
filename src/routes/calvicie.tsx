@@ -99,7 +99,7 @@ function BaldnessQuestion() {
                       search: { nome, grau: degree },
                     });
                   }}
-                  className="group relative aspect-[0.76] h-auto min-w-0 overflow-hidden rounded-2xl border-border bg-card p-0 text-left text-card-foreground shadow-none transition duration-300 hover:-translate-y-1 hover:border-primary/70 hover:bg-card focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-card"
+                  className="group relative aspect-[0.76] h-auto min-w-0 overflow-hidden rounded-lg border-border bg-card p-0 text-left text-card-foreground shadow-none transition duration-300 hover:-translate-y-1 hover:border-primary/70 hover:bg-card focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-card"
                 >
                   <span className="absolute inset-0 overflow-hidden bg-secondary">
                     <img
@@ -112,7 +112,7 @@ function BaldnessQuestion() {
                       className="size-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.025]"
                     />
                   </span>
-                  <span className="absolute inset-x-1.5 bottom-1.5 grid min-h-12 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 rounded-xl bg-foreground px-3 py-2 text-background sm:inset-x-2 sm:bottom-2 sm:min-h-14 sm:px-4">
+                  <span className="absolute inset-x-1.5 bottom-1.5 grid min-h-12 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 rounded-md bg-foreground px-3 py-2 text-background sm:inset-x-2 sm:bottom-2 sm:min-h-12 sm:px-3">
                     <span className="min-w-0 truncate text-sm font-bold sm:text-base">Grau {degree}</span>
                     <span className="grid size-8 shrink-0 place-items-center rounded-full bg-background text-foreground transition-transform group-hover:translate-x-0.5 sm:size-9">
                       <ArrowRight className="size-4 sm:size-5" />

@@ -99,7 +99,7 @@ function MotivationalPage() {
         <section className="mx-auto grid w-full max-w-[980px] items-center gap-9 lg:grid-cols-[minmax(0,0.92fr)_minmax(420px,1.08fr)] lg:gap-16" aria-labelledby="motivational-title">
           <div className="max-w-[500px] lg:py-8">
             <p className="text-xs font-semibold uppercase text-primary sm:text-sm">Você não está sozinho</p>
-            <h1 id="motivational-title" className="mt-4 font-display text-3xl font-bold leading-tight sm:text-4xl lg:text-[42px]">
+            <h1 id="motivational-title" className="mt-4 font-display text-3xl font-semibold leading-none sm:text-4xl lg:text-[42px]">
               {copy.total}
             </h1>
             <p className="mt-4 text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
@@ -111,7 +111,7 @@ function MotivationalPage() {
             </p>
           </div>
 
-          <div className="relative aspect-[4/3] min-h-0 overflow-hidden rounded-2xl border border-border bg-card">
+          <div className="relative aspect-[4/3] min-h-0 overflow-hidden rounded-lg border border-border bg-card">
             <img
               src={motivationalMenImage}
               alt="Três homens em diferentes fases da vida que decidiram cuidar dos cabelos"
@@ -130,7 +130,7 @@ function MotivationalPage() {
 
       <footer className="border-t border-border/70 px-5 py-4 sm:px-8">
         <div className="mx-auto flex max-w-[980px] justify-center">
-          <Button asChild className="h-12 w-full max-w-[360px] rounded-full text-sm font-bold uppercase">
+          <Button asChild className="h-12 w-full max-w-[360px] rounded-lg text-sm font-bold">
             <Link to="/tempo-queda" search={{ nome, grau }}>
               Continuar
               <ArrowRight className="size-4" />
