@@ -28,8 +28,9 @@ function VideoOpening() {
   return (
     <div className="quiz-page-background flex min-h-dvh flex-col bg-background text-foreground">
       <header className="relative border-b border-border/70">
-        <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[minmax(0,1fr)_auto] items-center px-5 sm:px-8 lg:px-12">
-          <Link to="/" className="min-w-0" aria-label="Stanley’s Care — início">
+        <div className="mx-auto grid h-[60px] max-w-[1180px] grid-cols-[40px_minmax(0,1fr)_40px] items-center gap-3 px-5 sm:px-8">
+          <span aria-hidden="true" />
+          <Link to="/" className="justify-self-center" aria-label="Stanley’s Care — início">
             <img src={logoAsset.url} alt="Stanley’s Care" className="h-auto w-[190px] max-w-[58vw]" />
           </Link>
           <Button
@@ -43,12 +44,13 @@ function VideoOpening() {
         </div>
       </header>
 
-      <main className="flex flex-1 justify-center px-4 py-6 sm:px-8 sm:py-8">
-        <section className="flex w-full max-w-[520px] flex-col items-center gap-5" aria-labelledby="opening-title">
+      <main className="flex flex-1 justify-center px-4 py-6 sm:px-8 sm:py-7">
+        <section className="flex w-full max-w-[500px] flex-col items-center gap-4" aria-labelledby="opening-title">
           <div className="max-w-[500px] text-center">
+            <p className="mb-3 text-[10px] font-bold uppercase text-primary sm:text-xs">Avaliação capilar personalizada</p>
             <h1
               id="opening-title"
-              className="font-display text-[28px] font-normal leading-tight sm:text-[34px]"
+              className="font-display text-[30px] font-semibold leading-[1.02] sm:text-[38px]"
             >
               O produto certo com um diagnóstico personalizado, veja o que seu cabelo pode estar tentando dizer
             </h1>
@@ -58,11 +60,11 @@ function VideoOpening() {
           </div>
 
           <div
-            className="aspect-[9/16] w-full max-w-[360px] max-h-[calc(100vh-350px)] overflow-hidden rounded-lg border border-border bg-card shadow-2xl"
+            className="aspect-[9/16] w-full max-w-[250px] max-h-[calc(100vh-330px)] overflow-hidden rounded-lg border border-border bg-card shadow-2xl sm:max-w-[270px]"
             aria-label="Espaço reservado para o vídeo de apresentação"
           />
 
-          <Button asChild className="h-14 w-full max-w-[420px] justify-between rounded-lg px-6 text-base font-semibold shadow-lg">
+          <Button asChild className="h-12 w-full max-w-[360px] justify-center rounded-lg px-6 text-sm font-bold">
             <Link to="/idade">
               Começar agora
               <ArrowRight className="size-5" aria-hidden="true" />

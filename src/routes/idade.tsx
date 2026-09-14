@@ -46,8 +46,9 @@ function AgeQuestion() {
   return (
     <div className="quiz-page-background relative flex min-h-dvh flex-col bg-background text-foreground">
       <header className="relative border-b border-border/70">
-        <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[minmax(0,1fr)_auto] items-center px-5 sm:px-8 lg:px-12">
-          <Link to="/" className="min-w-0" aria-label="Stanley’s Care — início">
+        <div className="mx-auto grid h-[60px] max-w-[1180px] grid-cols-[40px_minmax(0,1fr)_40px] items-center gap-3 px-5 sm:px-8">
+          <span aria-hidden="true" />
+          <Link to="/" className="justify-self-center" aria-label="Stanley’s Care — início">
             <img src={logoAsset.url} alt="Stanley’s Care" className="h-auto w-[190px] max-w-[58vw]" />
           </Link>
           <Button
@@ -62,14 +63,14 @@ function AgeQuestion() {
         <QuizProgress currentStep={1} />
       </header>
 
-      <main className="relative flex flex-1 items-start justify-center px-4 pb-10 pt-10 sm:px-8 sm:pb-28 sm:pt-16 lg:pt-14">
+      <main className="relative flex flex-1 items-start justify-center px-4 pb-10 pt-8 sm:px-8 sm:pb-20 sm:pt-9">
         <section className="relative w-full max-w-[930px]" aria-labelledby="page-title">
           <div className="text-center">
             <p className="mb-3 text-xs font-semibold uppercase text-primary sm:text-sm">Seu plano personalizado</p>
-            <h1 id="page-title" className="mx-auto max-w-[760px] font-display text-[28px] font-normal leading-tight sm:text-[34px] lg:text-[38px]">
+            <h1 id="page-title" className="mx-auto max-w-[760px] font-display text-[30px] font-semibold leading-[1.05] sm:text-[38px]">
               Cada fase da vida pede um cuidado diferente. Vamos encontrar o ideal para você.
             </h1>
-            <p className="mt-5 text-base font-semibold uppercase text-muted-foreground sm:text-lg">
+            <p className="mt-4 text-xs font-bold uppercase text-muted-foreground sm:text-sm">
               QUAL É A SUA IDADE?
             </p>
           </div>
@@ -87,7 +88,7 @@ function AgeQuestion() {
                     setSelectedAge(label);
                     void navigate({ to: "/nome", search: { nome: "" } });
                   }}
-                  className="group relative aspect-[0.76] h-auto min-w-0 overflow-hidden rounded-2xl border-border bg-card p-0 text-left text-card-foreground shadow-none transition duration-300 hover:-translate-y-1 hover:border-primary/70 hover:bg-card focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-card"
+                  className="group relative aspect-[0.76] h-auto min-w-0 overflow-hidden rounded-lg border-border bg-card p-0 text-left text-card-foreground shadow-none transition duration-300 hover:-translate-y-1 hover:border-primary/70 hover:bg-card focus-visible:ring-2 focus-visible:ring-primary aria-pressed:border-primary aria-pressed:bg-card"
                 >
                   <span className="absolute inset-0 overflow-hidden bg-secondary">
                     <img
@@ -100,7 +101,7 @@ function AgeQuestion() {
                       className="size-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.025]"
                     />
                   </span>
-                  <span className="absolute inset-x-1.5 bottom-1.5 grid min-h-12 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 rounded-xl bg-foreground px-3 py-2 text-background sm:inset-x-2 sm:bottom-2 sm:min-h-14 sm:px-4">
+                  <span className="absolute inset-x-1.5 bottom-1.5 grid min-h-12 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 rounded-md bg-foreground px-3 py-2 text-background sm:inset-x-2 sm:bottom-2 sm:min-h-12 sm:px-3">
                     <span className="min-w-0 truncate text-sm font-bold sm:text-base">Idade: {label}</span>
                     <span className="grid size-8 shrink-0 place-items-center rounded-full bg-background text-foreground transition-transform group-hover:translate-x-0.5 sm:size-9">
                       <ArrowRight className="size-4 sm:size-5" />

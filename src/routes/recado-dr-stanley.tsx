@@ -66,7 +66,7 @@ function DoctorMessage() {
   return (
     <div className="quiz-page-background flex min-h-dvh flex-col bg-background text-foreground">
       <header className="relative border-b border-border/70">
-        <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[40px_minmax(0,1fr)_40px] items-center gap-3 px-5 sm:px-8 lg:px-12">
+        <div className="mx-auto grid h-[60px] max-w-[1180px] grid-cols-[40px_minmax(0,1fr)_40px] items-center gap-3 px-5 sm:px-8 lg:px-8">
           <span aria-hidden="true" />
           <Link to="/" className="justify-self-center" aria-label="Stanley’s Care — início">
             <img src={logoAsset.url} alt="Stanley’s Care" className="h-auto w-[190px] max-w-[52vw]" />
@@ -90,7 +90,7 @@ function DoctorMessage() {
             </p>
           </div>
 
-          <div className="relative mt-7 aspect-[9/16] w-full max-w-[360px] overflow-hidden rounded-lg border border-border bg-card shadow-2xl" aria-label="Espaço reservado para o vídeo do Dr. Stanley Bittar">
+          <div className="relative mt-7 aspect-[9/16] w-full max-w-[280px] overflow-hidden rounded-lg border border-border bg-card shadow-2xl sm:max-w-[300px]" aria-label="Espaço reservado para o vídeo do Dr. Stanley Bittar">
             <div className="absolute inset-0 grid place-items-center">
               <span className="grid size-16 place-items-center rounded-full border border-primary/40 bg-primary/15 text-primary" aria-hidden="true">
                 <Play className="ml-1 size-7" />

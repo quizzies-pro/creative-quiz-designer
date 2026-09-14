@@ -39,7 +39,7 @@ function NameQuestion() {
   return (
     <div className="quiz-page-background relative flex min-h-dvh flex-col bg-background text-foreground">
       <header className="relative border-b border-border/70">
-        <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-5 sm:px-8 lg:px-12">
+        <div className="mx-auto grid h-[60px] max-w-[1180px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-5 sm:px-8 lg:px-8">
           <Button asChild variant="ghost" size="icon" className="size-10 rounded-full text-muted-foreground hover:bg-secondary hover:text-foreground">
             <Link to="/idade" aria-label="Voltar para escolha de idade">
               <ArrowLeft className="size-5" />
@@ -60,8 +60,8 @@ function NameQuestion() {
         <QuizProgress currentStep={2} />
       </header>
 
-      <main className="relative flex flex-1 items-start justify-center px-5 pb-12 pt-16 sm:items-center sm:px-8 sm:pb-28 sm:pt-8">
-        <section className="w-full max-w-[620px] text-center" aria-labelledby="name-question">
+      <main className="relative flex flex-1 items-start justify-center px-5 pb-12 pt-10 sm:px-8 sm:pt-10">
+        <section className="w-full max-w-[560px] text-center" aria-labelledby="name-question">
           <p className="text-xs font-semibold uppercase text-primary sm:text-sm">Seu plano personalizado</p>
           <h1 id="name-question" className="mt-4 font-display text-[28px] font-normal leading-[1.2] sm:text-[34px]">
             Qual é o seu nome?
@@ -71,7 +71,7 @@ function NameQuestion() {
           </p>
 
           <form
-            className="mx-auto mt-9 max-w-[520px]"
+            className="mx-auto mt-8 max-w-[520px]"
             onSubmit={(event) => {
               event.preventDefault();
               if (canContinue) {
@@ -91,12 +91,12 @@ function NameQuestion() {
               value={name}
               onChange={(event) => setName(event.target.value)}
               placeholder="Digite seu nome"
-              className="h-16 rounded-lg border-border bg-card px-5 text-base text-foreground shadow-none placeholder:text-muted-foreground focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/30 sm:h-[68px] sm:text-lg"
+              className="h-14 rounded-lg border-border bg-card px-5 text-base text-foreground shadow-none placeholder:text-muted-foreground focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/30"
             />
             <Button
               type="submit"
               disabled={!canContinue}
-              className="mt-4 h-14 w-full rounded-lg text-sm font-bold uppercase sm:h-16 sm:text-base"
+              className="mt-3 h-12 w-full rounded-lg text-sm font-bold"
             >
               Continuar
               <ArrowRight className="size-5" />

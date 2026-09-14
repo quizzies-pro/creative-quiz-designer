@@ -85,7 +85,7 @@ function PreviousTreatmentQuestion() {
   return (
     <div className="quiz-page-background flex min-h-dvh flex-col bg-background text-foreground">
       <header className="relative border-b border-border/70">
-        <div className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-5 sm:px-8 lg:px-12">
+        <div className="mx-auto grid h-[60px] max-w-[1180px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 px-5 sm:px-8 lg:px-8">
           <Button asChild variant="ghost" size="icon" className="size-10 rounded-full text-muted-foreground hover:bg-secondary hover:text-foreground">
             <Link
               to="/couro-cabeludo"
