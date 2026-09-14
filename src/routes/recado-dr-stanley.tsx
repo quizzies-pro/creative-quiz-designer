@@ -90,7 +90,7 @@ function DoctorMessage() {
             </p>
           </div>
 
-          <div className="relative mt-7 aspect-[9/16] w-full max-w-[360px] overflow-hidden rounded-lg border border-border bg-card shadow-2xl" aria-label="Espaço reservado para o vídeo do Dr. Stanley Bittar">
+          <div className="relative mt-7 aspect-[9/16] w-full max-w-[280px] overflow-hidden rounded-lg border border-border bg-card shadow-2xl sm:max-w-[300px]" aria-label="Espaço reservado para o vídeo do Dr. Stanley Bittar">
             <div className="absolute inset-0 grid place-items-center">
               <span className="grid size-16 place-items-center rounded-full border border-primary/40 bg-primary/15 text-primary" aria-hidden="true">
                 <Play className="ml-1 size-7" />

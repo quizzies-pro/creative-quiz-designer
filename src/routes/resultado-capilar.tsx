@@ -161,7 +161,7 @@ function HairResult() {
             </h1>
           </div>
 
-          <div className="grid overflow-hidden rounded-lg border border-border bg-card lg:grid-cols-[minmax(0,1.02fr)_minmax(360px,0.98fr)]">
+          <div className="grid overflow-hidden rounded-lg border border-border bg-card shadow-[0_24px_70px_color-mix(in_oklch,var(--background)_65%,transparent)] lg:grid-cols-[minmax(0,1.02fr)_minmax(360px,0.98fr)]">
             <div className="p-5 sm:p-8 lg:p-9">
               <h2 className="font-display text-xl font-normal sm:text-2xl">Nível de atenção capilar</h2>
 
@@ -218,7 +218,7 @@ function HairResult() {
       </main>
 
       <div className="safe-bottom fixed inset-x-0 bottom-0 z-50 border-t border-primary/30 bg-background/95 px-4 pt-3 shadow-[0_-12px_32px_hsl(var(--background)/0.72)] backdrop-blur-xl sm:px-8 sm:pt-4">
-        <Button asChild className="mx-auto flex h-14 w-full max-w-[520px] justify-between rounded-lg px-6 text-base font-semibold shadow-[0_0_28px_hsl(var(--primary)/0.32)] transition-transform hover:scale-[1.01] sm:h-16 sm:text-lg">
+        <Button asChild className="mx-auto flex h-14 w-full max-w-[520px] justify-between rounded-lg px-6 text-base font-semibold transition-transform hover:scale-[1.01] sm:h-16 sm:text-lg">
           <Link to="/recado-dr-stanley" search={search}>
             Quero iniciar meu cuidado
             <ArrowRight className="size-5" />
